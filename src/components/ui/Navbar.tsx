@@ -6,6 +6,7 @@ import { useContext, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { UIContext } from "~/context/ui";
+import { CartContext } from "~/context";
 
 export const Navbar = () => {
   const searchContainer = useRef<HTMLDivElement>(null);
@@ -14,7 +15,8 @@ export const Navbar = () => {
     searchContainer.current?.querySelector("input")?.focus();
   };
 
-  const { toggleSidebar, isSidebarOpen } = useContext(UIContext)
+  const { toggleSidebar } = useContext(UIContext)
+  const { state } = useContext(CartContext)
   
 
   return (
@@ -74,9 +76,12 @@ export const Navbar = () => {
           <span className="text-xs tracking-[-.5px]">Iniciar sesión</span>
         </div>
         {/* Carrito */}
-        <div className="mr-4 flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => toggleSidebar()}>
+        <div className="relative mr-4 flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => toggleSidebar()}>
           <AiOutlineShoppingCart className="text-xl" />
           <span className="text-xs tracking-[-.5px]">Ver carrito</span>
+          <div className="absolute top-0 -right-2 bg-dark-primary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white">
+            {state.length}
+          </div>
         </div>
       </div>
     </nav>
