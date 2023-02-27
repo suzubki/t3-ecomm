@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { CartContext, UIContext } from "~/context";
@@ -9,9 +9,9 @@ export const Sidebar = () => {
   const { toggleSidebar } = useContext(UIContext)
   const { state } = useContext(CartContext)
   const total = state.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-  
+
   return (
-    <div className="absolute flex flex-col gap-4 right-0 top-0 z-10 h-screen w-[30rem] shadow-md bg-white">
+    <div className="absolute overflow-auto flex flex-col right-0 top-0 z-10 h-screen shadow-md bg-white">
       {/* Carrito e Icon X */}
       <div className="px-6 my-2 py-6 flex justify-between shadow-sm">
         <div className="text-sm font-light tracking-[0.5px]">Carrito</div>
@@ -21,17 +21,17 @@ export const Sidebar = () => {
       </div>
       {
         state.length > 0 ? (
-          <div>
+          <div className="relative">
             {/* Grid cart item */}
             <GridCartItem items={state} />
             {/* Precio total a pagar */}
-            <div className="mt-4 absolute flex flex-col gap-4 w-full bottom-0">
+            <div className="fixed flex flex-col gap-4 w-full bottom-0">
               {/* Subtotal */}
               <div className="flex items-center gap-4 justify-between px-6">
                 <span className="text-2xl font-light tracking-[0.5px]">Subtotal</span>
                 <div className="flex items-center gap-1">
                   <span className="text-md">S/</span>
-                  <span className="text-2xl">{total}</span>
+                  <span className="text-2xl">{total.toFixed(2)}</span>
                 </div>
               </div>
               {/* Pagar y descripción */}
