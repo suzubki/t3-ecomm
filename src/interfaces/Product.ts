@@ -20,6 +20,7 @@ export interface CartProduct {
   price: number,
   quantity: number,
   size: string,
-  color: string,
   src: string,
+  
+  color?: string,
 }
