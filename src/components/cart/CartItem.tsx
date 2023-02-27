@@ -10,7 +10,7 @@ export const CartItem: FC<Props> = ({ item }) => {
   const { addQuantity, decreaseQuantity, removeProduct } = useContext(CartContext)
 
   return (
-      <div className="px-6 flex gap-6">
+      <div className="py-4 px-6 flex gap-6">
         <div className="w-full flex-[2]">
           <img src={item.src} className="w-full h-auto object-cover" />
         </div>
@@ -23,10 +23,14 @@ export const CartItem: FC<Props> = ({ item }) => {
                 <span className="font-semibold text-xs">Tamaño:</span>
                 <span className="text-gray-600">{item.size}</span>
               </div>
-              <div className="flex text-xs items-end gap-1">
-                <span className="font-semibold text-xs">Color:</span>
-                <span className="text-gray-600">{item.color}</span>
-              </div>
+              {
+                item.color && (
+                <div className="flex text-xs items-end gap-1">
+                  <span className="font-semibold text-xs">Color:</span>
+                  <span className="text-gray-600">{item.color}</span>
+                </div>
+                )
+              }
             </div>
           </div>
           <div className="flex justify-between">

@@ -8,10 +8,10 @@ interface Props{
 
 export const GridCartItem: FC<Props> = ({ items }) => {
   return (
-    <div className="flex flex-col">
+    <div className="h-[calc(100vh-4.5rem-12rem)] overflow-auto flex flex-col divide-y-2">
       {
         items.map((item)=> (
-          <CartItem item={item} key={`${item.id} - ${item.name}`} />
+          <CartItem item={item} key={`${item.id} - ${item.name} - ${item.size} - ${item.quantity}`} />
         ))
       }
     </div>
