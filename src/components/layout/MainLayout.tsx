@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, Transition, Variants } from "framer-motion";
 import { FC, ReactNode, useContext, useRef } from "react";
+import { AiFillGithub } from "react-icons/ai";
 
 import { Footer, Navbar, Sidebar } from "~/components";
 import { UIContext } from "~/context/ui";
@@ -63,7 +64,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
                 exit="closed"
                 transition={sidebarTransition}
                 variants={sidebarVariants}
-                className="fixed right-0 top-0 min-h-screen w-[20rem] bg-white shadow-lg z-50"
+                className="fixed right-0 top-0 min-h-screen min-w-[30rem] bg-white shadow-lg z-50"
               >
                   <Sidebar />
               </motion.div>
@@ -73,6 +74,20 @@ export const MainLayout: FC<Props> = ({ children }) => {
       </AnimatePresence>
       {/* Footer */}
       <Footer />
+      {/* Página en construcción */}
+      <div className="fixed bottom-0 left-0 h-20 w-full bg-amber-500">
+          <div className="mx-auto max-w-lg text-center text-white text-lg leading-5 font-semibold tracking-[-0.5px] h-full flex flex-col justify-center items-center">
+            <div className="flex text-xs font-bold text-dark-primary">
+                <p>Revisa el código en <span className="underline cursor-pointer"> GitHub</span>
+                <AiFillGithub className="relative inline-block h-4" />
+                . Desarrrollado por <span className="underline cursor-pointer">Darwin Narro</span></p>
+            </div>
+            <div className="flex flex-col">
+              <span>Está pagina aún se encuentra en construcción.</span>
+              <span>Typescript + Next.js + Tailwind + Framer Motion</span>
+            </div>
+          </div>
+      </div>
     </motion.div>
   );
 };
