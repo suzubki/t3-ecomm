@@ -1,52 +1,58 @@
 import { useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { UIContext } from "~/context/ui";
+
+import { CartContext, UIContext } from "~/context";
+import { GridCartItem } from "~/components";
+import { CartPersonIcon } from "../icons";
 
 export const Sidebar = () => {
   const { toggleSidebar } = useContext(UIContext)
+  const { state } = useContext(CartContext)
+  const total = state.reduce((acc, item) => acc + (item.price * item.quantity), 0)
   
-  
-  return <div className="absolute flex flex-col right-0 top-0 z-10 h-screen w-[25rem] shadow-md bg-white">
-    <div className="flex justify-end">
-      <AiOutlineClose className="m-4 p-2 h-8 w-8 cursor-pointer" onClick={() => toggleSidebar()} />
-    </div>
-    <div className="px-6 flex gap-6">
-        {/* Imagen del producto */}
-        {/* TODO: Mejorar el rendimiento de la imagen */}
-        <div className="w-full flex-[2]">
-          <img src={'/images/product_2/131336001_722613651700269_2966154303848251242_n.jpg'} className="w-full h-auto object-cover" />
+  return (
+    <div className="absolute flex flex-col gap-4 right-0 top-0 z-10 h-screen w-[30rem] shadow-md bg-white">
+      {/* Carrito e Icon X */}
+      <div className="px-6 my-2 py-6 flex justify-between shadow-sm">
+        <div className="text-sm font-light tracking-[0.5px]">Carrito</div>
+        <div className="flex justify-end">
+          <AiOutlineClose className="h-6 w-6 cursor-pointer" onClick={() => toggleSidebar()} />
         </div>
-        {/* Información del producto */}
-        <div className="flex flex-col pt-2 flex-[3] gap-8">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-lg font-bold">Nombre del producto</h1>
-            <div className="flex items-center gap-1">
-              <span className="text-gray-400 text-xs">Tamaño:</span>
-              <span className="font-bold text-sm text-gray-600">M</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="text-gray-400 text-xs">Color:</span>
-              <span className="font-bold text-sm text-gray-600">1</span>
+      </div>
+      {
+        state.length > 0 ? (
+          <div>
+            {/* Grid cart item */}
+            <GridCartItem items={state} />
+            {/* Precio total a pagar */}
+            <div className="mt-4 absolute flex flex-col gap-4 w-full bottom-0">
+              {/* Subtotal */}
+              <div className="flex items-center gap-4 justify-between px-6">
+                <span className="text-2xl font-light tracking-[0.5px]">Subtotal</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-md">S/</span>
+                  <span className="text-2xl">{total}</span>
+                </div>
+              </div>
+              {/* Pagar y descripción */}
+              <div className="w-full flex flex-col gap-1">
+                <div className="max-w-xs text-center leading-[1px] mx-auto">
+                  <span className="text-xs text-center text-gray-500">Envío, impuestos y códigos de descuento calculados al finalizar la compra.</span>
+                </div>
+                <button className="w-full bg-gray-700 text-white py-4 font-semibold tracking-[0.5px] duration-300 hover:bg-gray-800 transition-all ease-out">Pagar</button>
+              </div>
+            </div> 
+          </div>
+        ) : (
+          <div className="mx-6">
+            <span className="text-xs">Tu carrito de compras está vacío.</span>
+            <div className="flex items-center justify-center">
+              <CartPersonIcon />
             </div>
           </div>
-          <div className="flex justify-between">
-            {/* Botones para agregar/disminuir cantidad */}
-            <div className="flex items-center gap-3">
-              <button className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-xs font-bold">-</span>
-              </button>
-              <span className="text-xs font-bold">1</span>
-              <button className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-xs font-bold">+</span>
-              </button>
-            </div>
-            {/* Precio a pagar */}
-            <div>
-              <span className="text-xs font-bold">S/</span>
-              <span className="text-lg font-bold">20.00</span>
-            </div>
-          </div>
-        </div>
+        )
+      }
+
     </div>
-  </div>;
+  );
 };

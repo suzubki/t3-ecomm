@@ -60,7 +60,7 @@ export const Footer = () => {
             </h4>
             <span className="text-sm">Panda S.A.C Lima, Perú</span>
           </div>
-          <div className="flex items-end text-sm font-medium text-gray-400">
+          <div className="flex items-end text-xs font-medium text-gray-400">
             Compra 100% Segura
           </div>
         </div>

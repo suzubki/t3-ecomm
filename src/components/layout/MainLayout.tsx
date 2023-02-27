@@ -1,20 +1,33 @@
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, AnimatePresence, Transition, Variants } from "framer-motion";
 import { FC, ReactNode, useContext, useRef } from "react";
+
 import { Footer, Navbar, Sidebar } from "~/components";
 import { UIContext } from "~/context/ui";
-import { useClickOutside } from "~/hooks/useClickOutside";
+import { useClickOutside } from "~/hooks";
 
 interface Props {
   children: ReactNode;
 }
 
-const variants: Variants = {
+const sidebarVariants: Variants = {
   open: {
     x: 0,
   },
   closed: {
-    x: '100%',
-    transition: { duration: 0.3 }
+    x: '150%',
+  },
+}
+const sidebarTransition: Transition = {
+  duration: 0.2,
+  ease: 'linear',
+  delay: 0.15,
+}
+const backdropVariants: Variants = {
+  open: {
+    opacity: 0.3,
+  },
+  closed: {
+    opacity: 0,
   },
 }
 
@@ -31,28 +44,30 @@ export const MainLayout: FC<Props> = ({ children }) => {
       {/* Contenido */}
       <div className="relative z-0 mx-auto my-4 max-w-[78rem]">{children}</div>
       {/* Sidebar */}
-      {/* TODO: Agregar framer-motion */}
       <AnimatePresence mode="wait">
         {
           isSidebarOpen && (
-            <motion.div
-              initial={{
-                x: 0,
-              }}
-              animate={{
-                x: '100%',
-              }}
-              exit={{
-                x: 0,
-              }}
-              transition={{
-                duration: 0.3,
-                ease: 'easeInOut',
-              }}
-              className="fixed bg-black top-0 min-h-screen w-full flex"
-            >
-                <Sidebar />
-            </motion.div>
+
+            <div className="fixed top-0 flex w-full min-h-screen">
+              <motion.div 
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={backdropVariants}
+                className="bg-black contrast-50 min-h-screen flex-1" 
+              />
+              <motion.div
+                ref={sidebarContainerRef}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                transition={sidebarTransition}
+                variants={sidebarVariants}
+                className="fixed right-0 top-0 min-h-screen w-[20rem] bg-white shadow-lg z-50"
+              >
+                  <Sidebar />
+              </motion.div>
+            </div>
           )
         }
       </AnimatePresence>

@@ -12,11 +12,11 @@ interface Props {
 export const ProductCard: FC<Props> = ({ product }) => {
   return (
     <Link href={`/productos/${product.id}`} className="relative block">
-      <div className="flex h-full flex-1 flex-col rounded-md pb-2 shadow transition-all duration-300 ease-in hover:shadow-md">
+      <div className="flex h-full flex-1 flex-col rounded-md pb-2 shadow-sm transition-all duration-300 ease-in hover:shadow-md">
         {/* Contenedor de la imagen */}
         <div className="relative flex h-64 items-center">
           <div className="absolute top-8 right-4 z-50 flex flex-col items-center gap-1">
-            <AiOutlineHeart className="h-7 w-auto rounded-full p-1 text-gray-600 transition-all duration-300 ease-in hover:bg-red-500 hover:text-light-primary" />
+            <AiOutlineHeart className="h-7 w-auto rounded-full p-1 text-gray-600 transition-all duration-200 ease-in hover:bg-red-500 hover:text-light-primary" />
           </div>
           <Image
             alt={product.description}
