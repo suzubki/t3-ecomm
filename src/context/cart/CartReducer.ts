@@ -1,9 +1,10 @@
+import { CartProduct } from "~/interfaces";
 import { CartState } from "./";
 
 export type CartAction = { 
   type: "[CART] - ADD_PRODUCT"; 
   payload: { 
-    id: string
+    product: CartProduct
   } 
 } | { 
   type: "[CART] - ADD_QUANTITY";
@@ -25,7 +26,7 @@ export type CartAction = {
 export const CartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case '[CART] - ADD_PRODUCT':
-      return [...state]
+      return [...state, action.payload.product]
     
     case '[CART] - ADD_QUANTITY':
       return [...state].map(item => {

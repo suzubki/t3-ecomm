@@ -26,9 +26,11 @@ export const CartProvider: FC<Props> = ({ children }) => {
   const addQuantity = (id: number) => dispatch({ type: '[CART] - ADD_QUANTITY', payload: { id } })
   const decreaseQuantity = (id: number) => dispatch({ type: '[CART] - DECREASE_QUANTITY', payload: { id } })
   const removeProduct = (id: number) => dispatch({ type: '[CART] - REMOVE_PRODUCT', payload: { id } })
+  const addProduct = (product: CartProduct) => {
+    dispatch({ type: '[CART] - ADD_PRODUCT', payload: { product }})
+  }
 
-
-  return <CartContext.Provider value={{ state, addQuantity, decreaseQuantity, removeProduct }}>
+  return <CartContext.Provider value={{ state, addQuantity, decreaseQuantity, removeProduct, addProduct }}>
       {children}
     </CartContext.Provider>;
 };
