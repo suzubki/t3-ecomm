@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { ChangeEvent, FC, useState } from "react";
-import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiFillHeart, AiOutlineStar } from "react-icons/ai";
+import { ChangeEvent, FC, useContext, useState } from "react";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiFillHeart, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { CartContext, UIContext } from "~/context";
 import { Product } from "~/interfaces";
 
 interface Props {
@@ -12,13 +13,12 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
   const handleMainImage = (src: string) => {
     setMainImage(src);
   };
-  // información del producto seleccionado, talla, color, cantidad
+  // Información del producto seleccionado, talla y cantidad
   const [selectedProduct, setSelectedProduct] = useState({
     size: null as string | null,
-    color: null as string | null,
     quantity: 1,
   })
-  const handleSelectedProduct = (name: keyof typeof selectedProduct, value: string | number) => {
+  const handleProductSize = (name: keyof typeof selectedProduct, value: string | number) => {
     if(selectedProduct.size === value){
       setSelectedProduct({
         ...selectedProduct,
@@ -30,6 +30,29 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
       ...selectedProduct,
       [name]: value
     })
+  }
+  const handleProductAmount = (name: keyof typeof selectedProduct, value: number) => {
+    if(selectedProduct.quantity + value < 1) return
+    if(selectedProduct.quantity > 9 && value === 1) return
+    setSelectedProduct({
+      ...selectedProduct,
+      [name]: selectedProduct.quantity + value
+    })
+  }
+  // Agregar producto al carrito
+  const { addProduct } = useContext(CartContext)
+  const { toggleSidebar } = useContext(UIContext)
+  const handleAddProductToCart = () => {
+    if(!selectedProduct.size) return
+    addProduct({
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      quantity: selectedProduct.quantity,
+      size: selectedProduct.size,
+      src: mainImage
+    })
+    toggleSidebar()
   }
 
   return (
@@ -197,12 +220,12 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
             <div className="flex flex-col gap-2 pr-6">
               <h4 className="text-xs font-medium text-gray-400">Cantidad: </h4>
               {/* Botones */}
-              <div className="flex items-center gap-2">
-                <AiOutlineMinusCircle className="h-8 w-8 cursor-pointer rounded-full bg-dark-primary stroke-2 text-white" />
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-gray-300 bg-white text-dark-primary">
-                  1
+              <div className="flex items-center">
+                <AiOutlineMinus onClick={() => handleProductAmount('quantity', -1)} className="h-6 w-6 cursor-pointer text-dark-primary border-slate-300 border-solid border-[1px] p-1 hover:bg-slate-200" />
+                <div className="flex h-8 w-8 items-center font-medium justify-center text-dark-primary">
+                  {selectedProduct.quantity}
                 </div>
-                <AiOutlinePlusCircle className="h-8 w-8 cursor-pointer rounded-full bg-dark-primary stroke-2 text-white" />
+                <AiOutlinePlus onClick={() => handleProductAmount('quantity', +1)} className="h-6 w-6 cursor-pointer text-dark-primary border-slate-300 border-solid border-[1px] p-1 hover:bg-slate-200" />
               </div>
             </div>
             {/* Tamaño */}
@@ -215,7 +238,7 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
                   <button 
                     key={size + "-" + i}
                     className={`flex h-8 w-8 items-center justify-center border-2 border-solid border-gray-300 rounded-full transition-all duration-200 ease-out ${selectedProduct.size === size ? "bg-dark-primary text-white" : "bg-white text-dark-primary"}`} 
-                    onClick={() => handleSelectedProduct("size", size)} 
+                    onClick={() => handleProductSize("size", size)} 
                   >
                     {size}
                   </button>
@@ -223,31 +246,12 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
                 }
               </div>
             </div>
-            {/* Color */}
-            <div className="flex flex-col gap-2 px-6">
-              <h4 className="text-xs font-medium text-gray-400">Color: </h4>
-              {/* Botones */}
-              <div className="flex gap-2 text-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-dark-primary text-white">
-                  1
-                </div>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-gray-300 bg-white text-dark-primary">
-                  2
-                </div>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-dark-primary text-white">
-                  3
-                </div>
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-gray-300 bg-white text-dark-primary">
-                  4
-                </div>
-              </div>
-            </div>
           </div>
           {/* Agregar al carrito */}
           <div className="flex w-full flex-col gap-2 py-5">
             {/* Botones de agregar producto o agregar a favoritos */}
             <div className="flex gap-2">
-              <button className="flex items-center justify-center rounded-md border-[1px] border-solid border-dark-primary bg-dark-primary py-2 px-4 text-sm font-medium text-light-primary transition-all duration-300 ease-in hover:bg-white hover:text-dark-primary">
+              <button className="flex items-center justify-center rounded-md border-[1px] border-solid border-dark-primary bg-dark-primary py-2 px-4 text-sm font-medium text-light-primary transition-all duration-300 ease-in hover:bg-white hover:text-dark-primary" onClick={() => handleAddProductToCart()}>
                 Agregar al carrito
               </button>
               <button className="hover: flex items-center justify-center rounded-md py-1 px-2 text-xl text-dark-primary transition-all duration-300 ease-out hover:scale-110 hover:text-red-500">
