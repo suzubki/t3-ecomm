@@ -17,7 +17,7 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
           Productos similares
         </h2>
         <div className="mt-6">
-          <GridProductCard data={similarProducts} length={0} />
+          <GridProductCard data={similarProducts} />
         </div>
       </div>
       {/* Productos más vendidos */}
@@ -26,7 +26,7 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
           Productos más vendidos
         </h2>
         <div className="mt-6">
-          <GridProductCard data={mostSelledProducts} length={0} />
+          <GridProductCard data={mostSelledProducts} />
         </div>
       </div>
     </MainLayout>
@@ -35,7 +35,7 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 export const getStaticPaths = async () => {
   const res = await axios("https://fakestoreapi.com/products?limit=8");
-  const products = res.data as Product[];
+  const products: Product[] = await res.data;
 
   return {
     paths: products.map((el) => ({ params: { product: el.id.toString() } })),
