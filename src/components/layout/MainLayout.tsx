@@ -38,8 +38,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
   
   return (
-    <motion.div animate={{
-    }} className='relative min-h-screen bg-white'>
+    <div className='relative min-h-screen bg-white'>
       {/* Navbar */}
       <Navbar />
       {/* Contenido */}
@@ -87,6 +86,6 @@ export const MainLayout: FC<Props> = ({ children }) => {
             </div>
           </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
