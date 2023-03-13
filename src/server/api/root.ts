@@ -1,7 +1,9 @@
 import { createTRPCRouter } from "~/server/api/trpc";
+
+// Routers
 import { exampleRouter } from "~/server/api/routers/example";
 import { productsRouter } from "~/server/api/routers/products";
-import { categoryRouter } from "./routers/categories/[category]";
+import { categoryRouter } from "~/server/api/routers/categories";
 
 /**
  * This is the primary router for your server.
