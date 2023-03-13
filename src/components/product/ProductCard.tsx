@@ -11,8 +11,8 @@ interface Props {
 
 export const ProductCard: FC<Props> = ({ product }) => {
   return (
-    <Link href={`/productos/${product.id}`} className="relative block">
-      <div className="flex h-full flex-1 flex-col rounded-md pb-2 shadow-sm transition-all duration-300 ease-in hover:shadow-md">
+    <Link href={`/productos/${product.id}`} className="relative block w-full min-w-[16rem] max-w-[20rem]">
+      <div className="flex h-full flex-col rounded-md pb-2 shadow-sm transition-all duration-300 ease-in hover:shadow-md">
         {/* Contenedor de la imagen */}
         <div className="relative flex h-64 items-center">
           <div className="absolute top-8 right-4 z-50 flex flex-col items-center gap-1">
