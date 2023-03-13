@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { ChangeEvent, FC, useContext, useState } from "react";
-import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiFillHeart, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { FC, FormEvent, useContext, useState } from "react";
+import { AiFillInfoCircle, AiFillHeart, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { CartContext, UIContext } from "~/context";
 import { Product } from "~/interfaces";
+import { capitalizeFirstLetter } from "~/utils";
 
 interface Props {
   product: Product;
@@ -18,7 +19,9 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
     size: null as string | null,
     quantity: 1,
   })
+  const [showErrorForSelectedSize, setShowErrorForSelectedSize] = useState(false)
   const handleProductSize = (name: keyof typeof selectedProduct, value: string | number) => {
+    if(showErrorForSelectedSize || selectedProduct.size !== null ) setShowErrorForSelectedSize(false)
     if(selectedProduct.size === value){
       setSelectedProduct({
         ...selectedProduct,
@@ -42,8 +45,12 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
   // Agregar producto al carrito
   const { addProduct } = useContext(CartContext)
   const { toggleSidebar } = useContext(UIContext)
-  const handleAddProductToCart = () => {
-    if(!selectedProduct.size) return
+  const handleAddProductToCart = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(!selectedProduct.size) {
+      setShowErrorForSelectedSize(true)
+      return
+    }
     addProduct({
       id: product.id,
       name: product.title,
@@ -56,7 +63,7 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={handleAddProductToCart}>
       {/* Ruta del producto */}
       <div className="flex items-end gap-1 text-xs text-dark-primary">
         {/* Agregar un Link a cada uno de estos elementos */}
@@ -235,26 +242,45 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
               <div className="flex gap-2 text-xs">
                 {
                   ["S", "M", "L", "XL"].map((size, i) => (
-                  <button 
-                    key={size + "-" + i}
-                    className={`flex h-8 w-8 items-center justify-center border-2 border-solid border-gray-300 rounded-full transition-all duration-200 ease-out ${selectedProduct.size === size ? "bg-dark-primary text-white" : "bg-white text-dark-primary"}`} 
-                    onClick={() => handleProductSize("size", size)} 
-                  >
-                    {size}
-                  </button>
+                    <button 
+                      key={size + "-" + i}
+                      className={`flex h-8 w-8 items-center justify-center border-2 border-solid border-gray-300 rounded-full transition-all duration-200 ease-out ${selectedProduct.size === size ? "bg-dark-primary text-white" : "bg-white text-dark-primary"}`} 
+                      onClick={() => handleProductSize("size", size)} 
+                      type="button"
+                    >
+                      {size}
+                    </button>
                   ))
                 }
               </div>
+              {/* Error */}
+              {
+                showErrorForSelectedSize && (
+                  <div className="relative flex flex-col bg-sky-500 text-white">
+                    <div className="absolute -top-1 bg-sky-500 left-2 z-0 h-0 w-0 border-b-8 border-r-8 border-transparent transform rotate-45" />
+                    <div className="p-1 flex gap-1 z-10">
+                      <AiFillInfoCircle />
+                      <span className="text-xs font-medium">Debes seleccionar una opción</span>
+                    </div>
+                  </div>
+                )
+              }
             </div>
           </div>
           {/* Agregar al carrito */}
           <div className="flex w-full flex-col gap-2 py-5">
             {/* Botones de agregar producto o agregar a favoritos */}
             <div className="flex gap-2">
-              <button className="flex items-center justify-center rounded-md border-[1px] border-solid border-dark-primary bg-dark-primary py-2 px-4 text-sm font-medium text-light-primary transition-all duration-300 ease-in hover:bg-white hover:text-dark-primary" onClick={() => handleAddProductToCart()}>
+              <button 
+                className="flex items-center justify-center rounded-md border-[1px] border-solid border-dark-primary bg-dark-primary py-2 px-4 text-sm font-medium text-light-primary transition-all duration-300 ease-in hover:bg-white hover:text-dark-primary" 
+                type="submit"
+              >
                 Agregar al carrito
               </button>
-              <button className="hover: flex items-center justify-center rounded-md py-1 px-2 text-xl text-dark-primary transition-all duration-300 ease-out hover:scale-110 hover:text-red-500">
+              <button 
+                className="hover: flex items-center justify-center rounded-md py-1 px-2 text-xl text-dark-primary transition-all duration-300 ease-out hover:scale-110 hover:text-red-500"
+                type="button"
+              >
                 <AiFillHeart
                   className="h-6 w-6 stroke-current"
                   fill="currentColor"
@@ -288,9 +314,9 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
           <h3 className="text-xl font-semibold text-dark-primary">
             Descripción
           </h3>
-          <p className="text-sm text-gray-400">{product.description}</p>
+          <p className="text-sm text-gray-400">{capitalizeFirstLetter(product.description)}</p>
         </div>
       </div>
-    </div>
+    </form>
   )
 }

@@ -2,11 +2,12 @@ import Link from "next/link";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { UIContext } from "~/context/ui";
 import { CartContext } from "~/context";
+import { useClickOutside } from "~/hooks";
 
 export const Navbar = () => {
   const searchContainer = useRef<HTMLDivElement>(null);
@@ -17,7 +18,11 @@ export const Navbar = () => {
 
   const { toggleSidebar } = useContext(UIContext)
   const { state } = useContext(CartContext)
-  
+
+  // Categories is collapsed
+  const [isCollapsed, setIsCollapsed] = useState(false);  
+  const categoriesRef = useRef<HTMLDivElement>(null)
+  useClickOutside(searchContainer, () => setIsCollapsed(false))
 
   return (
     <nav className="flex relative z-0 flex-wrap items-center justify-between bg-light-primary px-6 py-3 shadow-lg">
@@ -25,19 +30,61 @@ export const Navbar = () => {
         {/* Logo */}
         <div className="flex flex-shrink-0 items-center text-white">
           <span className="text-xl font-semibold tracking-tight">
-            <Link href="/" className="text-2xl font-bold text-dark-primary">
+            <Link href="/test" className="text-2xl font-bold text-dark-primary">
               Panda
             </Link>
           </span>
         </div>
         {/* Items */}
         <div className="flex items-center gap-4">
-          <motion.div className="border-b-solid cursor-pointer border-b-2 p-2 text-gray-600 hover:border-gray-900 hover:font-medium hover:text-gray-900">
+          <motion.div 
+            // ref={categoriesRef} 
+            className="relative z-50 border-b-solid cursor-pointer border-b-2 p-2 text-gray-600 hover:border-gray-900 hover:font-medium hover:text-gray-900" 
+            onMouseEnter={() => setIsCollapsed(true)}
+          >
             <span className="flex items-center text-sm tracking-[-.5px]">
               Categorías
               {/* Icon arrow down */}
               <MdKeyboardArrowDown className="text-xl" />
             </span>
+            {
+              isCollapsed && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute z-50 left-0 w-56 bg-light-primary shadow-lg rounded-md p-4"
+                >
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                      <span className="text-sm font-medium text-gray-600">Hombre</span>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm text-gray-600">Camisetas</span>
+                        <span className="text-sm text-gray-600">Pantalones</span>
+                        <span className="text-sm text-gray-600">Zapatos</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <span className="text-sm font-medium text-gray-600">Mujer</span>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm text-gray-600">Camisetas</span>
+                        <span className="text-sm text-gray-600">Pantalones</span>
+                        <span className="text-sm text-gray-600">Zapatos</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <span className="text-sm font-medium text-gray-600">Niños</span>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-sm text-gray-600">Camisetas</span>
+                        <span className="text-sm text-gray-600">Pantalones</span>
+                        <span className="text-sm text-gray-600">Zapatos</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            }
           </motion.div>
           <div className="cursor-pointer p-2 text-gray-600 hover:font-medium hover:text-gray-900">
             <span className="flex items-center text-sm tracking-[-.5px]">

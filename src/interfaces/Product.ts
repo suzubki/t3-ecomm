@@ -14,13 +14,10 @@ export interface Rating {
 }
 
 export interface CartProduct {
-  //TODO: Addapt this interface to the CartItem interface
   id: number,
   name: string,
   price: number,
   quantity: number,
   size: string,
   src: string,
-  
-  color?: string,
 }

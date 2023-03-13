@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@svgr/webpack": "^6.5.1",
     "@types/eslint": "^8.21.1",
     "@types/node": "^18.11.18",
     "@types/prettier": "^2.7.2",

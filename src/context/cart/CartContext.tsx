@@ -5,10 +5,10 @@ import { CartState } from "./";
 export interface CartContextProps {
   state: CartState;
   
-  addQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
-  removeProduct: (id: number) => void;
-  addProduct: (productToCart: CartProduct) => void;
+  addQuantity: (product: CartProduct, quantity: number) => void;
+  decreaseQuantity: (product: CartProduct) => void;
+  removeProduct: (product: CartProduct) => void;
+  addProduct: (product: CartProduct) => void;
 };
 
 export const CartContext = createContext({} as CartContextProps);

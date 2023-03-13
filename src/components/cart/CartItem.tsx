@@ -23,14 +23,6 @@ export const CartItem: FC<Props> = ({ item }) => {
                 <span className="font-semibold text-xs">Tamaño:</span>
                 <span className="text-gray-600">{item.size}</span>
               </div>
-              {
-                item.color && (
-                <div className="flex text-xs items-end gap-1">
-                  <span className="font-semibold text-xs">Color:</span>
-                  <span className="text-gray-600">{item.color}</span>
-                </div>
-                )
-              }
             </div>
           </div>
           <div className="flex justify-between">
@@ -38,14 +30,14 @@ export const CartItem: FC<Props> = ({ item }) => {
             <div className="flex items-center gap-3">
               <button 
                 className="w-6 h-6 shadow-sm bg-gray-100 flex items-center justify-center hover:bg-gray-700 duration-100 hover:text-white transition-all ease-in"
-                onClick={() => decreaseQuantity(item.id)}
+                onClick={() => decreaseQuantity(item)}
               >
                 <span className="text-xs font-bold">-</span>
               </button>
               <span className="text-xs font-bold">{item.quantity}</span>
               <button 
                 className="w-6 h-6 shadow-sm bg-gray-100 flex items-center justify-center hover:bg-gray-700 duration-100 hover:text-white transition-all ease-in"
-                onClick={() => addQuantity(item.id)}
+                onClick={() => addQuantity(item, 1)}
               >
                 <span className="text-xs font-bold">+</span>
               </button>
@@ -59,7 +51,7 @@ export const CartItem: FC<Props> = ({ item }) => {
           <div className="text-end">
             <button 
               className="text-xs text-gray-500 hover:text-gray-700 duration-100 transition-all ease-in"
-              onClick={() => removeProduct(item.id)}
+              onClick={() => removeProduct(item)}
             >
               Eliminar
             </button>

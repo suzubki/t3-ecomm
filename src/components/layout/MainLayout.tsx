@@ -48,8 +48,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
       <AnimatePresence mode="wait">
         {
           isSidebarOpen && (
-
-            <div className="fixed top-0 flex w-full min-h-screen">
+            <div className="fixed z-20 top-0 flex w-full min-h-screen">
               <motion.div 
                 initial="closed"
                 animate="open"
@@ -75,7 +74,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
       {/* Footer */}
       <Footer />
       {/* Página en construcción */}
-      <div className="fixed bottom-0 left-0 h-20 w-full bg-amber-500">
+      <div className="fixed bottom-0 z-10 left-0 h-20 w-full bg-amber-500">
           <div className="mx-auto max-w-lg text-center text-white text-lg leading-5 font-semibold tracking-[-0.5px] h-full flex flex-col justify-center items-center">
             <div className="flex text-xs font-bold text-dark-primary">
                 <p>Revisa el código en <span className="underline cursor-pointer"> GitHub</span>
@@ -84,7 +83,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
             </div>
             <div className="flex flex-col">
               <span>Está pagina aún se encuentra en construcción.</span>
-              <span>Typescript + Next.js + Tailwind + Framer Motion</span>
+              <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
             </div>
           </div>
       </div>

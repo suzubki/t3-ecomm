@@ -13,7 +13,6 @@ const INITIAL_VALUES: CartProduct[] = [
     price: 20,
     quantity: 1,
     size: "M",
-    color: "Rojo",
     src: "/images/product_2/131336001_722613651700269_2966154303848251242_n.jpg",
   }
 ];
@@ -23,10 +22,20 @@ export type CartState = CartProduct[];
 export const CartProvider: FC<Props> = ({ children }) => {
   const [ state, dispatch ] = useReducer(CartReducer, INITIAL_VALUES)
 
-  const addQuantity = (id: number) => dispatch({ type: '[CART] - ADD_QUANTITY', payload: { id } })
-  const decreaseQuantity = (id: number) => dispatch({ type: '[CART] - DECREASE_QUANTITY', payload: { id } })
-  const removeProduct = (id: number) => dispatch({ type: '[CART] - REMOVE_PRODUCT', payload: { id } })
+  const addQuantity = (product: CartProduct, quantity: number) => {
+    dispatch({ type: '[CART] - ADD_QUANTITY', payload: { id: product.id, size: product.size, quantity }})
+  }
+  const decreaseQuantity = (product: CartProduct) => {
+    dispatch({ type: '[CART] - DECREASE_QUANTITY', payload: { id: product.id, size: product.size } })
+  }
+  const removeProduct = (product: CartProduct) => {
+    dispatch({ type: '[CART] - REMOVE_PRODUCT', payload: { id: product.id, size: product.size } })
+  }
   const addProduct = (product: CartProduct) => {
+    const productExists = state.find((item) => item.id === product.id)
+    if (productExists && product.size === productExists.size) {
+      return addQuantity(product, product.quantity)
+    }
     dispatch({ type: '[CART] - ADD_PRODUCT', payload: { product }})
   }
 

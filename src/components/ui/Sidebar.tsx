@@ -11,7 +11,7 @@ export const Sidebar = () => {
   const total = state.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
   return (
-    <div className="absolute overflow-auto flex flex-col right-0 top-0 z-10 h-screen shadow-md bg-white">
+    <div className="absolute overflow-auto flex flex-col right-0 top-0 z-20 h-screen shadow-md bg-white">
       {/* Carrito e Icon X */}
       <div className="px-6 my-2 py-6 flex justify-between shadow-sm">
         <div className="text-sm font-light tracking-[0.5px]">Carrito</div>
