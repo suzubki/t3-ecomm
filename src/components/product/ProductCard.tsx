@@ -37,10 +37,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           {/* Precio */}
           <div className="flex items-end justify-center gap-2">
             <span className="text-xs text-gray-500 line-through">
-              S/.{(product.price + 50).toFixed(2)}
+              $ {(product.price + 10).toFixed(2)}
             </span>
             <h4 className="text-sm font-semibold">
-              S/.{product.price.toFixed(2)}
+              $ {product.price.toFixed(2)}
             </h4>
           </div>
         </div>

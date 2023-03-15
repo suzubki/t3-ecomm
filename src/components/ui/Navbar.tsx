@@ -30,7 +30,7 @@ export const Navbar = () => {
         {/* Logo */}
         <div className="flex flex-shrink-0 items-center text-white">
           <button className="text-xl font-semibold tracking-tight">
-            <Link href="/test" className="text-2xl font-bold text-dark-primary">
+            <Link href="/" className="text-2xl font-bold text-dark-primary">
               Panda
             </Link>
           </button>
@@ -44,7 +44,7 @@ export const Navbar = () => {
               className="p-2 flex items-center text-sm tracking-[-.5px] hover:font-medium hover:text-gray-900"
               onMouseEnter={() => setIsCollapsed(true)}
             >
-              Categorías
+              Categories
               {/* Icon arrow down */}
               <MdKeyboardArrowDown className="text-xl" />
             </button>
@@ -75,7 +75,7 @@ export const Navbar = () => {
           </div>
           <div className="cursor-pointer p-2 text-gray-600 hover:font-medium hover:text-gray-900">
             <Link href="/about-us" className="flex items-center text-sm tracking-[-.5px]">
-              Sobre nosotros
+              About us
             </Link>
           </div>
         </div>
@@ -90,19 +90,19 @@ export const Navbar = () => {
           <AiOutlineSearch className="text-xl text-gray-500" />
           <input
             type="text"
-            placeholder="Buscar"
+            placeholder="Search..."
             className="border-b-2 border-solid border-b-gray-300 bg-light-primary font-medium placeholder:text-xs focus:border-b-dark-primary focus:outline-none"
           />
         </div>
         {/* User Icon */}
         <div className="flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600">
           <BiUserCircle className="text-xl" />
-          <span className="text-xs tracking-[-.5px]">Iniciar sesión</span>
+          <span className="text-xs tracking-[-.5px]">Log in</span>
         </div>
         {/* Carrito */}
         <div className="relative mr-4 flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => toggleSidebar()}>
           <AiOutlineShoppingCart className="text-xl" />
-          <span className="text-xs tracking-[-.5px]">Ver carrito</span>
+          <span className="text-xs tracking-[-.5px]">Cart</span>
           <div className="absolute top-0 -right-2 bg-dark-primary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white">
             {state.length}
           </div>
