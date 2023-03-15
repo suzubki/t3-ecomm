@@ -1,4 +1,9 @@
+import Link from "next/link";
+import { AiFillFacebook, AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
+import { FiSmartphone } from "react-icons/fi";
+
 export const Footer = () => {
+
   return (
     <div className="mt-10 border-t-2 border-solid border-t-gray-300">
       {/* Grid */}
@@ -11,10 +16,18 @@ export const Footer = () => {
               <span className="text-sm text-gray-400">Compartir en</span>
               <span>
                 {/* Iconos */}
-                F, T y I
+                <a className="icon-container" aria-label="Share in Facebook" data-share="Share in Facebook" href="#">
+                  <AiFillFacebook className="inline-block w-6 h-auto" />
+                </a>
+                <a className="icon-container" aria-label="Share in Twitter" data-share="Share in Twitter" href="#">
+                  <AiFillTwitterCircle className="inline-block w-6 h-auto" />
+                </a>
+                <a className="icon-container" aria-label="Share in Instagram" data-share="Share in Instagram" href="#">
+                  <AiFillInstagram className="inline-block w-6 h-auto" />
+                </a>
               </span>
             </div>
-            <span className="text-sm text-gray-400">(+51)922860113</span>
+            <span className="flex items-center text-sm text-gray-400"><FiSmartphone className="text-dark-primary inline-block w-6 h-auto" />(+51)922860113</span>
             <span className="mt-4 text-sm text-gray-400">Outlet, 2023</span>
           </div>
         </div>
@@ -22,12 +35,12 @@ export const Footer = () => {
         <div className="flex flex-col gap-6">
           <h2 className="text-xl font-semibold tracking-[-1px]">Secciones</h2>
           <div className="flex flex-col gap-4 font-medium text-gray-600">
-            <span className="text-sm">Inicio</span>
-            <span className="text-sm">Categorías</span>
-            <span className="text-sm">Nuevos productos</span>
-            <span className="text-sm">Marcas</span>
-            <span className="text-sm">Blog</span>
-            <span className="text-sm">Sobre nosotros</span>
+            <Link href="/" className="text-sm">Inicio</Link>
+            <Link href="/categories/electronics" className="text-sm">Electronics</Link>
+            <Link href="/categories/jewelery" className="text-sm">Jewelery</Link>
+            <Link href="/categories/mens-clothing" className="text-sm">Men's clothing</Link>
+            <Link href="/categories/womens-clothing" className="text-sm">Women's clothing</Link>
+            <Link href="/about-us" className="text-sm">About us</Link>
           </div>
         </div>
         {/* 3 - Col */}
