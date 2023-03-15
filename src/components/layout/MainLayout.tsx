@@ -42,7 +42,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
       {/* Navbar */}
       <Navbar />
       {/* Contenido */}
-      <div className="relative z-0 mx-auto my-4 max-w-[78rem]">{children}</div>
+      <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
       {/* Sidebar */}
       <AnimatePresence mode="wait">
         {
