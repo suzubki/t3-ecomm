@@ -18,3 +18,26 @@
 input {
   font-family: "Inter", sans-serif;
 }
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-container::before {
+  content: attr(data-share);
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: -10px;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 4px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.icon-container:hover::before {
+  display: block;
+}
