@@ -75,19 +75,9 @@ export const Navbar = () => {
             </AnimatePresence>
           </div>
           <div className="cursor-pointer p-2 text-gray-600 hover:font-medium hover:text-gray-900">
-            <span className="flex items-center text-sm tracking-[-.5px]">
-              Nuevos productos
-            </span>
-          </div>
-          <div className="cursor-pointer p-2 text-gray-600 hover:font-medium hover:text-gray-900">
-            <span className="flex items-center text-sm tracking-[-.5px]">
+            <Link href="/about-us" className="flex items-center text-sm tracking-[-.5px]">
               Sobre nosotros
-            </span>
-          </div>
-          <div className="cursor-pointer p-2 text-gray-600 hover:font-medium hover:text-gray-900">
-            <span className="flex items-center text-sm tracking-[-.5px]">
-              Ayuda
-            </span>
+            </Link>
           </div>
         </div>
       </div>
