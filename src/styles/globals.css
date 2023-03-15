@@ -28,7 +28,7 @@ input {
   content: attr(data-share);
   display: none;
   position: absolute;
-  top: 35px;
+  top: 36px;
   left: -10px;
   background-color: black;
   color: white;
