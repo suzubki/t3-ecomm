@@ -6,16 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const INITIAL_VALUES: CartProduct[] = [
-  {
-    id: 1000,
-    name: "Producto 1",
-    price: 20,
-    quantity: 1,
-    size: "M",
-    src: "/images/product_2/131336001_722613651700269_2966154303848251242_n.jpg",
-  }
-];
+const INITIAL_VALUES: CartProduct[] = [];
 
 export type CartState = CartProduct[];
 
