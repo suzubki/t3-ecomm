@@ -1,6 +1,7 @@
-import axios from "axios"
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import Link from "next/link"
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import axios from "axios"
+
 import { GridProductCard, MainLayout } from "~/components"
 import { Category, Product } from "~/interfaces"
 import { slugifyText } from "~/utils"
@@ -14,11 +15,13 @@ const CategoryPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => 
         <div className="flex divide-x-2">
           <div className="flex flex-col h-full mr-2">
               <h2 className="text-2xl font-semibold text-dark-primary">Categorías</h2>
-              <div className="w-full flex flex-col gap-1">
-                  <Link href="/categories/mens-clothing" className="block bg-gray-300 px-1 py-1 w-64 rounded-md font-semibold text-dark-primary">Men's clothing</Link>
-                  <Link href="/categories/womens-clothing" className="block bg-gray-300 px-1 py-1 w-64 rounded-md font-semibold text-dark-primary">Women's clothing</Link>
-                  <Link href="/categories/electronics" className="block bg-gray-300 px-1 py-1 w-64 rounded-md font-semibold text-dark-primary">Electronics</Link>
-                  <Link href="/categories/jewelery" className="block bg-gray-300 px-1 py-1 w-64 rounded-md font-semibold text-dark-primary">Jewelery</Link>
+              {/* Tabla de categorías */}
+              <div className="mt-4 w-full flex flex-col gap-1">
+                {
+                  ["Men's clothing", "Women's clothing", "Electronics", "Jewelery"].map((category) => (
+                    <Link href="/categories/mens-clothing" className={`block ${categoryName === category.toLowerCase() ? "bg-gray-200 font-semibold text-dark-primary" : "bg-transparent text-gray-500 font-medium"} px-3 tracking-[-1px] py-2 w-64 rounded-md transition-all duration-200 hover:bg-gray-200 hover:font-semibold hover:text-dark-primary`}>{category}</Link>
+                  ))
+                }
               </div>
           </div>
           
