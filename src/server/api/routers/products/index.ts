@@ -1,5 +1,5 @@
-import { Product } from "~/interfaces";
 import { createTRPCRouter, publicProcedure } from "../../trpc";
+import type { Product } from "~/interfaces";
 
 export const productsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async () => {

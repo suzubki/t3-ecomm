@@ -1,23 +1,20 @@
-import { RefObject, useEffect } from 'react'
+import { useEffect } from 'react';
+
+type ClickOutsideHandler = () => void;
 
 export const useClickOutside = (
-  ref: RefObject<HTMLDivElement>,
-  onClickOutside: any
+  ref: React.RefObject<HTMLDivElement>,
+  onClickOutside: ClickOutsideHandler
 ) => {
   useEffect(() => {
-    /**
-     * Invoke Function onClick outside of element
-     */
-    const handleClickOutside = (event: any) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onClickOutside()
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClickOutside();
       }
-    }
-    // Bind
-    document.addEventListener('mousedown', handleClickOutside)
+    };
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      // dispose
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref, onClickOutside])
-}
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, onClickOutside]);
+};

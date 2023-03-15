@@ -22,7 +22,6 @@ export const Navbar = () => {
 
   // Categories is collapsed
   const [isCollapsed, setIsCollapsed] = useState(false);  
-  const categoriesRef = useRef<HTMLDivElement>(null)
   useClickOutside(searchContainer, () => setIsCollapsed(false))
 
   return (
@@ -65,7 +64,7 @@ export const Navbar = () => {
                       {/* Each of categories */}
                       {
                         ["electronics", "jewelery", "men's clothing", "women's clothing"].map((category) => (
-                          <Link href={`/categories/${slugifyText(category)}`} className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">{category}</Link>
+                          <Link href={`/categories/${slugifyText(category)}`} key={category} className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">{category}</Link>
                         ))
                       }
                     </div>

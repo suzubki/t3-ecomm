@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { UIState } from "./UIProvider";
+import type { UIState } from "./UIProvider";
 
 // TODO: agregar props
 interface UIContext extends UIState {

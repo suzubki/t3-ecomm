@@ -1,18 +1,19 @@
-import { FC, useContext } from "react";
+import Image from "next/image";
+import { useContext } from "react";
 import { CartContext } from "~/context";
-import { CartProduct } from "~/interfaces";
+import type { CartProduct } from "~/interfaces";
 
 interface Props{
   item: CartProduct
 }
 
-export const CartItem: FC<Props> = ({ item }) => {
+export const CartItem: React.FC<Props> = ({ item }) => {
   const { addQuantity, decreaseQuantity, removeProduct } = useContext(CartContext)
 
   return (
       <div className="py-4 px-6 flex gap-6">
         <div className="w-full flex-[2]">
-          <img src={item.src} className="w-full h-auto object-cover" />
+          <Image alt={`${item.name}`} width={400} height={400} src={item.src} className="w-full h-auto object-cover" />
         </div>
         {/* Información del producto */}
         <div className="flex flex-col pt-2 flex-[3] gap-8">

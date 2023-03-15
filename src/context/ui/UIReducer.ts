@@ -1,4 +1,4 @@
-import { UIState } from "./";
+import type { UIState } from "./";
 
 interface Payload {
   type: '[UI] - TOGGLE_SIDEBAR';

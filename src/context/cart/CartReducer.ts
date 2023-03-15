@@ -1,5 +1,5 @@
-import { CartProduct } from "~/interfaces";
-import { CartState } from "./";
+import type { CartProduct } from "~/interfaces";
+import type { CartState } from "./";
 
 export type CartAction = { 
   type: "[CART] - ADD_PRODUCT"; 

@@ -1,6 +1,7 @@
 import { z } from "zod";
-import { Category, Product } from "~/interfaces";
 import { createTRPCRouter, publicProcedure } from "../../trpc";
+
+import type { Category, Product } from "~/interfaces";
 
 export const categoryRouter = createTRPCRouter({
   getIn: publicProcedure

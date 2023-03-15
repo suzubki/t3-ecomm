@@ -1,8 +1,8 @@
-import { FC, ReactNode, useReducer } from "react";
+import { useReducer } from "react";
 import { UIContext, UIReducer } from "./";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export interface UIState {
@@ -15,7 +15,7 @@ export const INITIAL_STATE: UIState = {
 
 export type InitialStateType = typeof INITIAL_STATE
 
-export const UIProvider: FC<Props> = ({ children }) => {
+export const UIProvider: React.FC<Props> = ({ children }) => {
   const [state , dispatch] = useReducer(UIReducer, INITIAL_STATE)
   
   const toggleSidebar = () => {

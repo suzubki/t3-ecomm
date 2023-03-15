@@ -1,13 +1,11 @@
 import { ProductCard } from "./ProductCard";
-import { FC } from "react";
-
-import { Product } from "~/interfaces";
+import type { Product } from "~/interfaces";
 
 interface Props {
   data?: Product[];
 }
 
-export const GridProductCard: FC<Props> = ({ data }) => {
+export const GridProductCard: React.FC<Props> = ({ data }) => {
   return (
     <div className="flex-1 flex flex-wrap justify-center px-4 lg:gap-8">
       {data?.map((product, i) => (

@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 
-import { Product } from "~/interfaces";
+import type { Product } from "~/interfaces";
 
 interface Props {
   product: Product;
 }
 
-export const ProductCard: FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <Link href={`/productos/${product.id}`} className="relative block w-full min-w-[16rem] max-w-[18rem]">
       <div className="flex h-full flex-col rounded-md pb-2 shadow-sm transition-all duration-300 ease-in hover:shadow-md">

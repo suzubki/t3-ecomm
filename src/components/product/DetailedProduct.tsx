@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { FC, FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillInfoCircle, AiFillHeart, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { CartContext, UIContext } from "~/context";
-import { Product } from "~/interfaces";
 import { capitalizeFirstLetter } from "~/utils";
+import type { Product } from "~/interfaces";
 
 interface Props {
   product: Product;
 }
 
-export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) => {
+export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product }) => {
   const [mainImage, setMainImage] = useState(product.image);
   const handleMainImage = (src: string) => {
     setMainImage(src);
@@ -45,7 +45,7 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
   // Agregar producto al carrito
   const { addProduct } = useContext(CartContext)
   const { toggleSidebar } = useContext(UIContext)
-  const handleAddProductToCart = (e: FormEvent<HTMLFormElement>) => {
+  const handleAddProductToCart = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if(!selectedProduct.size) {
       setShowErrorForSelectedSize(true)
@@ -243,7 +243,7 @@ export const DetailedProduct: FC<Props> = ({ product }: { product: Product }) =>
                 {
                   ["S", "M", "L", "XL"].map((size, i) => (
                     <button 
-                      key={size + "-" + i}
+                      key={`${size} - ${i}`}
                       className={`flex h-8 w-8 items-center justify-center border-2 border-solid border-gray-300 rounded-full transition-all duration-200 ease-out ${selectedProduct.size === size ? "bg-dark-primary text-white" : "bg-white text-dark-primary"}`} 
                       onClick={() => handleProductSize("size", size)} 
                       type="button"

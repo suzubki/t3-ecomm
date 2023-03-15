@@ -1,8 +1,8 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import axios from "axios";
+import { GridProductCard, DetailedProduct, MainLayout } from "~/components";
 
-import { Product } from "~/interfaces";
-import { GridProductCard, DetailedProduct,MainLayout } from "~/components";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import type { Product } from "~/interfaces";
 
 const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { product, similarProducts, mostSelledProducts } = props;
@@ -35,7 +35,7 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 export const getStaticPaths = async () => {
   const res = await axios("https://fakestoreapi.com/products");
-  const products: Product[] = await res.data;
+  const products = await res.data as Product[];
 
   return {
     paths: products.map((el) => ({ params: { product: el.id.toString() } })),

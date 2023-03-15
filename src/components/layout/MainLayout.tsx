@@ -1,5 +1,7 @@
-import { motion, AnimatePresence, Transition, Variants } from "framer-motion";
-import { FC, ReactNode, useContext, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import type { Transition, Variants } from "framer-motion";
+
+import { useContext, useRef } from "react";
 import { AiFillGithub } from "react-icons/ai";
 
 import { Footer, Navbar, Sidebar } from "~/components";
@@ -7,7 +9,7 @@ import { UIContext } from "~/context/ui";
 import { useClickOutside } from "~/hooks";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const sidebarVariants: Variants = {
@@ -32,7 +34,7 @@ const backdropVariants: Variants = {
   },
 }
 
-export const MainLayout: FC<Props> = ({ children }) => {
+export const MainLayout: React.FC<Props> = ({ children }) => {
   const { isSidebarOpen, toggleSidebar } = useContext(UIContext)
   const sidebarContainerRef = useRef<HTMLDivElement>(null)
   useClickOutside(sidebarContainerRef, () => toggleSidebar())

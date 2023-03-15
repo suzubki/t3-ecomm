@@ -1,11 +1,11 @@
 import { GridProductCard } from "~/components";
 import { MainLayout } from "~/components/layout";
-import { Product } from "~/interfaces";
+import type { Product } from "~/interfaces";
 
 const TestPage = ({ products }: { products: Product[] }) => {
   return (
     <MainLayout>
-      <GridProductCard length={0} data={products} />
+      <GridProductCard data={products} />
     </MainLayout>
   );
 };
@@ -14,7 +14,7 @@ export default TestPage;
 
 export const getStaticProps = async () => {
   const res = await fetch("https://fakestoreapi.com/products?limit=8");
-  const products = await res.json();
+  const products = await res.json() as Product[];
 
   return {
     props: {

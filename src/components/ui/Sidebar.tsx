@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { CartContext, UIContext } from "~/context";

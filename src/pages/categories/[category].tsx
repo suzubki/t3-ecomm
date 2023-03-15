@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import axios from "axios"
-
 import { GridProductCard, MainLayout } from "~/components"
-import { Category, Product } from "~/interfaces"
 import { slugifyText } from "~/utils"
+
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import type { Category, Product } from "~/interfaces"
 
 const CategoryPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { products, categoryName } = props
@@ -19,7 +19,7 @@ const CategoryPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => 
               <div className="mt-4 w-full flex flex-col gap-1">
                 {
                   ["Men's clothing", "Women's clothing", "Electronics", "Jewelery"].map((category) => (
-                    <Link href="/categories/mens-clothing" className={`block ${categoryName === category.toLowerCase() ? "bg-gray-200 font-semibold text-dark-primary" : "bg-transparent text-gray-500 font-medium"} px-3 tracking-[-1px] py-2 w-64 rounded-md transition-all duration-200 hover:bg-gray-200 hover:font-semibold hover:text-dark-primary`}>{category}</Link>
+                    <Link href="/categories/mens-clothing" key={category} className={`block ${categoryName === category.toLowerCase() ? "bg-gray-200 font-semibold text-dark-primary" : "bg-transparent text-gray-500 font-medium"} px-3 tracking-[-1px] py-2 w-64 rounded-md transition-all duration-200 hover:bg-gray-200 hover:font-semibold hover:text-dark-primary`}>{category}</Link>
                   ))
                 }
               </div>
@@ -35,7 +35,7 @@ export default CategoryPage
 
 export const getStaticPaths = async () => {
   const res = await axios("https://fakestoreapi.com/products/categories")
-  const categories: Category[] = await res.data
+  const categories = await res.data as Category[]
 
   return {
     paths: categories.map((category) => ({
@@ -58,7 +58,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   }
 
   const res = await axios(`https://fakestoreapi.com/products/category/${category}`)
-  const productsInCategory: Product[] = await res.data
+  const productsInCategory = await res.data as Product[]
 
   return {
     props: {

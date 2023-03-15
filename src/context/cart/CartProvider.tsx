@@ -1,9 +1,9 @@
-import { FC, ReactNode, useReducer } from "react";
-import { CartProduct } from "~/interfaces";
+import { useReducer } from "react";
 import { CartContext, CartReducer } from "./";
+import type { CartProduct } from "~/interfaces";
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const INITIAL_VALUES: CartProduct[] = [
@@ -19,7 +19,7 @@ const INITIAL_VALUES: CartProduct[] = [
 
 export type CartState = CartProduct[];
 
-export const CartProvider: FC<Props> = ({ children }) => {
+export const CartProvider: React.FC<Props> = ({ children }) => {
   const [ state, dispatch ] = useReducer(CartReducer, INITIAL_VALUES)
 
   const addQuantity = (product: CartProduct, quantity: number) => {

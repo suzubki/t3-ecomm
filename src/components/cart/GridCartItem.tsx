@@ -1,12 +1,11 @@
-import { FC } from "react"
-import { CartProduct } from "~/interfaces"
 import { CartItem } from "./"
+import type { CartProduct } from "~/interfaces"
 
 interface Props{
   items: CartProduct[]
 }
 
-export const GridCartItem: FC<Props> = ({ items }) => {
+export const GridCartItem: React.FC<Props> = ({ items }) => {
   return (
     <div className="h-[calc(100vh-4.5rem-12rem)] overflow-auto flex flex-col divide-y-2">
       {

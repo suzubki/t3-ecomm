@@ -38,8 +38,8 @@ export const Footer = () => {
             <Link href="/" className="text-sm">Inicio</Link>
             <Link href="/categories/electronics" className="text-sm">Electronics</Link>
             <Link href="/categories/jewelery" className="text-sm">Jewelery</Link>
-            <Link href="/categories/mens-clothing" className="text-sm">Men's clothing</Link>
-            <Link href="/categories/womens-clothing" className="text-sm">Women's clothing</Link>
+            <Link href="/categories/mens-clothing" className="text-sm">Men&apos;s clothing</Link>
+            <Link href="/categories/womens-clothing" className="text-sm">Women&apos;s clothing</Link>
             <Link href="/about-us" className="text-sm">About us</Link>
           </div>
         </div>
