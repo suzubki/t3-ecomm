@@ -34,7 +34,7 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await axios("https://fakestoreapi.com/products?limit=8");
+  const res = await axios("https://fakestoreapi.com/products");
   const products: Product[] = await res.data;
 
   return {
