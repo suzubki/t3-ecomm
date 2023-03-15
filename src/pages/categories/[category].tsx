@@ -1,33 +1,40 @@
+import Head from "next/head"
 import Link from "next/link"
 import axios from "axios"
 import { GridProductCard, MainLayout } from "~/components"
-import { slugifyText } from "~/utils"
+import { capitalizeFirstLetter, slugifyText } from "~/utils"
 
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import type { Category, Product } from "~/interfaces"
 
 const CategoryPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { products, categoryName } = props
+  console.log(categoryName)
 
   return (
-    <MainLayout>
-        {/* Sidebar of other categories and the selected is bolder */}
-        <div className="flex divide-x-2">
-          <div className="flex flex-col h-full mr-2">
-              <h2 className="text-2xl font-semibold text-dark-primary">Categorías</h2>
-              {/* Tabla de categorías */}
-              <div className="mt-4 w-full flex flex-col gap-1">
-                {
-                  ["Men's clothing", "Women's clothing", "Electronics", "Jewelery"].map((category) => (
-                    <Link href="/categories/mens-clothing" key={category} className={`block ${categoryName === category.toLowerCase() ? "bg-gray-200 font-semibold text-dark-primary" : "bg-transparent text-gray-500 font-medium"} px-3 tracking-[-1px] py-2 w-64 rounded-md transition-all duration-200 hover:bg-gray-200 hover:font-semibold hover:text-dark-primary`}>{category}</Link>
-                  ))
-                }
-              </div>
+    <>
+      <Head>
+        <title>{`Panda - ${capitalizeFirstLetter(categoryName)} category`}</title>
+      </Head>
+      <MainLayout>
+          {/* Sidebar of other categories and the selected is bolder */}
+          <div className="flex divide-x-2">
+            <div className="flex flex-col h-full mr-2">
+                <h2 className="text-2xl font-semibold text-dark-primary">Categorías</h2>
+                {/* Tabla de categorías */}
+                <div className="mt-4 w-full flex flex-col gap-1">
+                  {
+                    ["Men's clothing", "Women's clothing", "Electronics", "Jewelery"].map((category) => (
+                      <Link href="/categories/mens-clothing" key={category} className={`block ${categoryName === category.toLowerCase() ? "bg-gray-200 font-semibold text-dark-primary" : "bg-transparent text-gray-500 font-medium"} px-3 tracking-[-1px] py-2 w-64 rounded-md transition-all duration-200 hover:bg-gray-200 hover:font-semibold hover:text-dark-primary`}>{category}</Link>
+                    ))
+                  }
+                </div>
+            </div>
+            
+            <GridProductCard data={products} />
           </div>
-          
-          <GridProductCard data={products} />
-        </div>
-    </MainLayout>
+      </MainLayout>
+    </>
   )
 }
 
