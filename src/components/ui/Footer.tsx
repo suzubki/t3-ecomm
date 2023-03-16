@@ -33,48 +33,48 @@ export const Footer = () => {
         </div>
         {/* 2 - Col */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-xl font-semibold tracking-[-1px]">Secciones</h2>
+          <h2 className="text-xl font-semibold tracking-[-1px]">Sections</h2>
           <div className="flex flex-col gap-4 font-medium text-gray-600">
-            <Link href="/" className="text-sm">Home</Link>
-            <Link href="/categories/electronics" className="text-sm">Electronics</Link>
-            <Link href="/categories/jewelery" className="text-sm">Jewelery</Link>
-            <Link href="/categories/mens-clothing" className="text-sm">Men&apos;s clothing</Link>
-            <Link href="/categories/womens-clothing" className="text-sm">Women&apos;s clothing</Link>
-            <Link href="/about-us" className="text-sm">About us</Link>
+            <Link href="/" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Home</Link>
+            <Link href="/categories/electronics" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Electronics</Link>
+            <Link href="/categories/jewelery" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Jewelery</Link>
+            <Link href="/categories/mens-clothing" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Men&apos;s clothing</Link>
+            <Link href="/categories/womens-clothing" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Women&apos;s clothing</Link>
+            <Link href="/about-us" className="text-sm w-max hover:text-gray-700 hover:font-semibold">About us</Link>
           </div>
         </div>
         {/* 3 - Col */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-xl font-semibold tracking-[-1px]">Information</h2>
+          <h2 className="text-xl font-semibold tracking-[-1px]">Legal Information</h2>
           <div className="flex flex-col gap-4 font-medium text-gray-600">
-            <span className="text-sm">Terms and Conditions</span>
-            <span className="text-sm">Frequently Asked Questions - FAQ</span>
-            <span className="text-sm">Delivery</span>
-            <span className="text-sm">Returns</span>
+            <Link aria-label="Terms and conditions" href="/information/terms-and-conditions" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Terms and Conditions</Link>
+            <Link aria-label="Frequently" href="/information/frequently-asked-questions" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Frequently Asked Questions - FAQ</Link>
+            <Link aria-label="Delivery" href="/information/delivery" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Delivery</Link>
+            <Link aria-label="Returns" href="/information/returns" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Returns</Link>
           </div>
         </div>
         {/* 4 - Col */}
         <div className="flex flex-col gap-6">
-          <h2 className="text-xl font-semibold tracking-[-1px]">Ayuda</h2>
+          <h2 className="text-xl font-semibold tracking-[-1px]">Help</h2>
           <div className="flex flex-col gap-4 font-medium text-gray-600">
-            <span className="text-sm">Contact us</span>
-            <span className="text-sm">Work with us</span>
-            <span className="text-sm">Cookies policy</span>
-            <span className="text-sm">Privacy policy</span>
+            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Contact us</span>
+            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Work with us</span>
+            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Cookies policy</span>
+            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Privacy policy</span>
           </div>
         </div>
       </div>
       {/* Footer */}
-      <div className="border-t-2 border-solid border-t-gray-300 py-4">
+      <div className="mb-24 border-t-2 border-solid border-t-gray-300 py-4">
         <div className="mx-auto mx-auto flex max-w-[78rem] justify-between">
           <div className="flex flex-col gap-1">
             <h4 className="text font-semibold tracking-[-1px]">
               © All the rights reserved
             </h4>
-            <span className="text-sm">Panda S.A.C Lima, Perú</span>
+            <span className="text-sm">Panda</span>
           </div>
           <div className="flex items-end text-xs font-medium text-gray-400">
-            Compra 100% Segura
+              24/7 Customer Support Available
           </div>
         </div>
       </div>
