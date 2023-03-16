@@ -19,7 +19,7 @@ const AboutUsPage = () => {
           In Panda, we are more than an online store. We are a community of people passionate about fashion, technology, home, and lifestyle in general. Our team is made up of experts in each of these areas, allowing us to offer a carefully curated selection of products to meet the needs of each customer.
           </p>
           <p className="mt-4 text-dark-primary tracking-[-.4px]">
-          We also believe in the importance of sustainability. That's why we partner with suppliers and manufacturers who share our passion for protecting the environment. We strive to offer high-quality and affordable products that are also ethical and sustainable.
+          We also believe in the importance of sustainability. That&apos;s why we partner with suppliers and manufacturers who share our passion for protecting the environment. We strive to offer high-quality and affordable products that are also ethical and sustainable.
           </p>
           <p className="mt-4 text-dark-primary tracking-[-.4px]">
           Furthermore, we know that our customers are the reason we exist. Therefore, we are always willing to listen to their feedback and suggestions. We strive to provide exceptional customer service and do our best to ensure customer satisfaction at every stage of the purchasing process.
