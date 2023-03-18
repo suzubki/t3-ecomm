@@ -11,10 +11,10 @@ const AboutUsPage = () => {
       </Head>
       <MainLayout>
         <div className="mx-auto relative flex flex-col items-center justify-center">
-          <Panda heigth={400} width={400} />
+          <Panda className="w-[80%] h-auto sm:w-[400px]" />
         </div>
-        <div className="mx-auto max-w-[50rem]">
-          <h1 className="text-4xl text-dark-primary text-center uppercase tracking-[-3px]">Sobre Nosotros</h1>
+        <div className="px-10 mx-auto max-w-[50rem]">
+          <h1 className="text-4xl text-dark-primary text-center uppercase tracking-[-3px]">About us</h1>
           <p className="mt-12 text-dark-primary tracking-[-.4px]">
           In Panda, we are more than an online store. We are a community of people passionate about fashion, technology, home, and lifestyle in general. Our team is made up of experts in each of these areas, allowing us to offer a carefully curated selection of products to meet the needs of each customer.
           </p>
