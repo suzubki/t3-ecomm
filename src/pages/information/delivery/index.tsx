@@ -8,11 +8,13 @@ const DeliveryPage = () => {
         <title>Panda - Delivery</title>
       </Head>
       <MainLayout>
-        <div className="flex mt-10">
-          <SidebarInformation />
-          <div className="py-20 flex flex-col gap-20">
-            <h2 className="text-4xl text-center font-semibold tracking-[-1px]">Delivery</h2>
-            <p className="mx-20">
+        <div className="flex flex-col lg:flex-row mt-10">
+          <div className="mx-10">
+            <SidebarInformation />
+          </div>
+          <div className="py-10 flex flex-col gap-10 sm:gap-20 sm:py-20">
+            <h2 className="mx-10 sm:mx-20 text-4xl text-center font-semibold tracking-[-1px]">Delivery</h2>
+            <p className="mx-10 sm:mx-20">
               Welcome to our delivery page! At Panda, we understand that getting your order to you as quickly and efficiently as possible is important. That&apos;s why we offer a range of shipping options to meet your needs. We want to make sure that you have all the information you need about our shipping policies and procedures so that you can make an informed decision when choosing a shipping option. Please read on for more information about our shipping options, rates, and delivery times. If you have any questions, please don&apos;t hesitate to contact us. We&apos;re always here to help!
             </p>
             <div className="flex flex-col gap-10">
@@ -21,7 +23,7 @@ const DeliveryPage = () => {
                   <>
                     We offer a variety of shipping options to meet your needs. The available options may vary depending on your location and the size and weight of your order. Some of the shipping options we offer include:
                     <br/>
-                    <div className="mt-4 ml-8">
+                    <div className="mt-4 ml-4 sm:ml-8">
                       <span className="inline font-medium">- Standard shipping:</span> This is our most economical option and typically takes 3-5 business days to arrive. <br/>
                       <span className="inline font-medium">- Expedited shipping:</span> This option is faster than standard shipping and typically takes 2-3 business days to arrive. <br/>
                       <span className="inline font-medium">- Overnight shipping:</span> This is our fastest option and is guaranteed to arrive the next business day.
