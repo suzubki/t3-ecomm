@@ -8,6 +8,10 @@ module.exports = {
         "dark-primary": "#1f2937",
         "more-dark-primary": "#111827",
       },
+      fontFamily: {
+        'merriweather': ['Merriweather', 'serif'],
+        'inter': ['Inter', 'sans-serif'],
+      }
     },
   },
   plugins: [],
