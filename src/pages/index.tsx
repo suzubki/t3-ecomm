@@ -12,7 +12,10 @@ const HomePage = ({ products }: { products: Product[] }) => {
         <title>Panda</title>
       </Head>
       <MainLayout>
-        <GridProductCard data={products} />
+      {/* Main container */}
+        <div className="mx-16 lg:mx-20">
+          <GridProductCard data={products} />
+        </div>
       </MainLayout>
     </>
   );
