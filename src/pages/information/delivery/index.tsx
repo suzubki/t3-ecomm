@@ -13,7 +13,7 @@ const DeliveryPage = () => {
           <div className="py-20 flex flex-col gap-20">
             <h2 className="text-4xl text-center font-semibold tracking-[-1px]">Delivery</h2>
             <p className="mx-20">
-              Welcome to our delivery page! At Panda, we understand that getting your order to you as quickly and efficiently as possible is important. That's why we offer a range of shipping options to meet your needs. We want to make sure that you have all the information you need about our shipping policies and procedures so that you can make an informed decision when choosing a shipping option. Please read on for more information about our shipping options, rates, and delivery times. If you have any questions, please don't hesitate to contact us. We're always here to help!
+              Welcome to our delivery page! At Panda, we understand that getting your order to you as quickly and efficiently as possible is important. That&apos;s why we offer a range of shipping options to meet your needs. We want to make sure that you have all the information you need about our shipping policies and procedures so that you can make an informed decision when choosing a shipping option. Please read on for more information about our shipping options, rates, and delivery times. If you have any questions, please don&apos;t hesitate to contact us. We&apos;re always here to help!
             </p>
             <div className="flex flex-col gap-10">
               <DescriptionItem title="Delivery Information" description="At Panda, we strive to provide the best possible delivery service for our customers. Our delivery options are designed to be flexible, reliable and affordable." />

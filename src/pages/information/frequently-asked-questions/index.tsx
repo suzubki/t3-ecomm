@@ -13,7 +13,7 @@ const FrequentlyAskedQuestionsPage: React.FC = () => {
           <div className="py-20 flex flex-col gap-20">
             <h2 className="text-4xl text-center font-semibold tracking-[-1px]">Frequently asked questions - FAQ</h2>
             <p className="mx-20">
-              Welcome to our FAQ section! We understand that you may have some questions about our products, policies, and services. To make things easier for you, we've compiled a list of frequently asked questions and provided detailed answers to each one. If you don't find the information you're looking for here, please feel free to contact our customer support team. We're always here to help!
+              Welcome to our FAQ section! We understand that you may have some questions about our products, policies, and services. To make things easier for you, we&apos;ve compiled a list of frequently asked questions and provided detailed answers to each one. If you don&apos;t find the information you&apos;re looking for here, please feel free to contact our customer support team. We&apos;re always here to help!
             </p>
             <div className="flex flex-col gap-10">
               <DescriptionItem title="What forms of payment do you accept?" description="We accept Visa, Mastercard, American Express, Discover, PayPal, and Apple Pay." />
