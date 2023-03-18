@@ -8,11 +8,13 @@ const ReturnsPage = () => {
         <title>Panda - Returns</title>
       </Head>
       <MainLayout>
-        <div className="flex mt-10">
-          <SidebarInformation />
-          <div className="py-20 flex flex-col gap-20">
-            <h2 className="text-4xl text-center font-semibold tracking-[-1px]">Returns & Refunds</h2>
-            <p className="mx-20">
+        <div className="flex flex-col lg:flex-row mt-10">
+          <div className="mx-10">
+            <SidebarInformation />
+          </div>
+          <div className="py-10 flex flex-col gap-10 sm:gap-20 sm:py-20">
+            <h2 className="mx-10 sm:mx-20 text-4xl text-center font-semibold tracking-[-1px]">Returns & Refunds</h2>
+            <p className="mx-10 sm:mx-20">
               Welcome to our Returns & Refunds page. We want to make sure that you are completely satisfied with your purchase from our store. If for any reason you are not satisfied, we are here to help you. Please read the following information carefully to understand our return policy and procedures.
             </p>
             <div className="flex flex-col gap-10">
