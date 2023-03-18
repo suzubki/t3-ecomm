@@ -41,7 +41,14 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
   
   return (
-    <div className='relative min-h-screen bg-white'>
+    <div className='font-inter relative min-h-screen bg-white'>
+      {/* Cuppon for this month */}
+      <div className="w-full z-10 bg-amber-500 text-white text-xs text-center font-medium tracking-[1px] px-4 py-2">
+        <p className="uppercase font-merriweather">Use code <span className="font-semibold">PANDA</span> for 10% off
+          and free shipping on all orders over $50
+        </p>
+      </div>
+
       {/* Navbar */}
       <Navbar />
       {/* Contenido */}
@@ -83,7 +90,7 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
                 <AiFillGithub className="relative inline-block h-4" />
                 . Developed by <Link href="https://dev-dana.com" aria-label="Devdana project - Pandas ecommerce" className="underline cursor-pointer" target='_blank'>Darwin Narro</Link></p>
             </div>
-            <div className="flex flex-col">
+            <div className="text-xs sm:text-base flex flex-col">
               <span>This page is still under development.</span>
               <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
             </div>
