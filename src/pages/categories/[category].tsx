@@ -18,7 +18,7 @@ const CategoryPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => 
       </Head>
       <MainLayout>
           {/* Sidebar of other categories and the selected is bolder */}
-          <div className="flex divide-x-2">
+          <div className="mx-10 xl:mx-0 flex flex-col items-center lg:flex-start lg:flex-row lg:divide-x-2">
             <div className="flex flex-col h-full mr-2">
                 <h2 className="text-2xl font-semibold text-dark-primary">Categorías</h2>
                 {/* Tabla de categorías */}
