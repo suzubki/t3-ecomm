@@ -58,10 +58,9 @@ export const Footer = () => {
         <div className="flex flex-col md:gap-6">
           <h2 className="text-xl font-semibold tracking-[-1px]">Help</h2>
           <div className="flex flex-col gap-0 md:gap-4 font-medium text-gray-600">
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Contact us</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Work with us</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Cookies policy</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Privacy policy</span>
+            <Link href="/help/contact-us" aria-label="Contact us" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Contact us</Link>
+            <Link href="/help/cookies-policy" aria-label="Cookies privacy" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Cookies policy</Link>
+            <Link href="/help/privacy-policy" aria-label="Privacy policy" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Privacy policy</Link>
           </div>
         </div>
       </div>
