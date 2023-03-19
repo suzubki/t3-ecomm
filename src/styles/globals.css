@@ -7,7 +7,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   padding: 0;
   margin: 0;
   text-decoration: none;
@@ -28,7 +28,7 @@ input {
   content: attr(data-share);
   display: none;
   position: absolute;
-  top: 35px;
+  top: 36px;
   left: -10px;
   background-color: black;
   color: white;

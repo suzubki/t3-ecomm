@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import { CartContext, UIContext } from "~/context";
 import { GridCartItem } from "~/components";
-import { CartPersonIcon } from "../icons";
+import CartPersonIcon from "../../../public/icons/shopping-cart.svg";
 
 export const Sidebar = () => {
   const { toggleSidebar } = useContext(UIContext)
@@ -11,10 +11,10 @@ export const Sidebar = () => {
   const total = state.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
   return (
-    <div className="absolute overflow-auto flex flex-col right-0 top-0 z-20 h-screen shadow-md bg-white">
+    <div className="w-full absolute overflow-auto flex flex-col right-0 top-0 z-20 h-screen shadow-md bg-white">
       {/* Carrito e Icon X */}
       <div className="px-6 my-2 py-6 flex justify-between shadow-sm">
-        <div className="text-sm font-light tracking-[0.5px]">Carrito</div>
+        <div className="text-sm font-light tracking-[0.5px]">Cart</div>
         <div className="flex justify-end">
           <AiOutlineClose className="h-6 w-6 cursor-pointer" onClick={() => toggleSidebar()} />
         </div>
@@ -24,7 +24,7 @@ export const Sidebar = () => {
           <div className="relative">
             {/* Grid cart item */}
             <GridCartItem items={state} />
-            {/* Precio total a pagar */}
+            {/* Amount to pay */}
             <div className="fixed flex flex-col gap-4 w-full bottom-0">
               {/* Subtotal */}
               <div className="flex items-center gap-4 justify-between px-6">
@@ -45,9 +45,9 @@ export const Sidebar = () => {
           </div>
         ) : (
           <div className="mx-6">
-            <span className="text-xs">Tu carrito de compras está vacío.</span>
+            <span className="text-xs">Your shopping cart is empty.</span>
             <div className="flex items-center justify-center">
-              <CartPersonIcon />
+              <CartPersonIcon width={400} height={400} />
             </div>
           </div>
         )

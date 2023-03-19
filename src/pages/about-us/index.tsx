@@ -1,28 +1,35 @@
+import Head from "next/head"
 import { MainLayout } from "~/components"
+
 import Panda from "../../../public/panda.svg"
 
 const AboutUsPage = () => {
   return (
-    <MainLayout>
-      <div className="mx-auto relative flex flex-col items-center justify-center">
-        <Panda heigth={400} width={400} />
-      </div>
-      <div className="mx-auto max-w-[50rem]">
-        <h1 className="text-4xl text-dark-primary text-center uppercase tracking-[-3px]">Sobre Nosotros</h1>
-        <p className="mt-12 text-dark-primary tracking-[-.4px]">
-        En Panda, somos más que una tienda en línea. Somos una comunidad de personas apasionadas por la moda, la tecnología, el hogar y el estilo de vida en general. Nuestro equipo está formado por expertos en cada una de estas áreas, lo que nos permite ofrecer una selección cuidadosamente curada de productos para satisfacer las necesidades de cada cliente.
-        </p>
-        <p className="mt-4 text-dark-primary tracking-[-.4px]">
-        Asimismo, creemos en la importancia de la sostenibilidad. Es por eso que nos asociamos con proveedores y fabricantes que comparten nuestra pasión por la protección del medio ambiente. Nos esforzamos por ofrecer productos de alta calidad y asequibles que también sean éticos y sostenibles.
-        </p>
-        <p className="mt-4 text-dark-primary tracking-[-.4px]">
-        Además, sabemos que nuestros clientes son nuestra razón de ser. Por lo tanto, siempre estamos dispuestos a escuchar sus comentarios y sugerencias. Nos esforzamos por ofrecer un servicio excepcional al cliente y hacemos todo lo posible para garantizar la satisfacción de nuestros clientes en cada etapa del proceso de compra.
-        </p>
-        <p className="mt-4 text-dark-primary tracking-[-.4px]">
-        En resumen, en Panda estamos dedicados a ofrecer una experiencia de compra en línea única y excepcional. Esperamos que disfrutes navegando por nuestra selección de productos cuidadosamente seleccionados y que encuentres todo lo que necesitas para complementar tu estilo de vida. ¡Gracias por elegir Panda como tu tienda en línea de confianza!
-        </p>
-      </div>
-    </MainLayout>
+    <>
+      <Head>
+        <title>Panda - About us</title>
+      </Head>
+      <MainLayout>
+        <div className="mx-auto relative flex flex-col items-center justify-center">
+          <Panda className="w-[80%] h-auto sm:w-[400px]" />
+        </div>
+        <div className="px-10 mx-auto max-w-[50rem]">
+          <h1 className="text-4xl text-dark-primary text-center uppercase tracking-[-3px]">About us</h1>
+          <p className="mt-12 text-dark-primary tracking-[-.4px]">
+          In Panda, we are more than an online store. We are a community of people passionate about fashion, technology, home, and lifestyle in general. Our team is made up of experts in each of these areas, allowing us to offer a carefully curated selection of products to meet the needs of each customer.
+          </p>
+          <p className="mt-4 text-dark-primary tracking-[-.4px]">
+          We also believe in the importance of sustainability. That&apos;s why we partner with suppliers and manufacturers who share our passion for protecting the environment. We strive to offer high-quality and affordable products that are also ethical and sustainable.
+          </p>
+          <p className="mt-4 text-dark-primary tracking-[-.4px]">
+          Furthermore, we know that our customers are the reason we exist. Therefore, we are always willing to listen to their feedback and suggestions. We strive to provide exceptional customer service and do our best to ensure customer satisfaction at every stage of the purchasing process.
+          </p>
+          <p className="mt-4 text-dark-primary tracking-[-.4px]">
+          In summary, at Panda, we are dedicated to offering a unique and exceptional online shopping experience. We hope you enjoy browsing through our carefully selected product range and find everything you need to complement your lifestyle. Thank you for choosing Panda as your trusted online store!
+          </p>
+        </div>
+      </MainLayout>
+    </>
   )
 }
 

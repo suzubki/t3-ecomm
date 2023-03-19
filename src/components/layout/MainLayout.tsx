@@ -7,6 +7,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { Footer, Navbar, Sidebar } from "~/components";
 import { UIContext } from "~/context/ui";
 import { useClickOutside } from "~/hooks";
+import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;
@@ -40,7 +41,14 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
   
   return (
-    <div className='relative min-h-screen bg-white'>
+    <div className='font-inter relative min-h-screen bg-white'>
+      {/* Cuppon for this month */}
+      <div className="w-full z-10 bg-amber-500 text-white text-xs text-center font-medium tracking-[1px] px-4 py-2">
+        <p className="uppercase font-merriweather">Use code <span className="font-semibold">PANDA</span> for 10% off
+          and free shipping on all orders over $50
+        </p>
+      </div>
+
       {/* Navbar */}
       <Navbar />
       {/* Contenido */}
@@ -78,12 +86,12 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
       <div className="fixed bottom-0 z-10 left-0 h-20 w-full bg-amber-500">
           <div className="mx-auto max-w-lg text-center text-white text-lg leading-5 font-semibold tracking-[-0.5px] h-full flex flex-col justify-center items-center">
             <div className="flex text-xs font-bold text-dark-primary">
-                <p>Revisa el código en <span className="underline cursor-pointer"> GitHub</span>
+                <p>Check out the code on<Link aria-label="Github code" href="https://github.com/suzubki/t3-ecomm" target='_blank' className="underline cursor-pointer"> GitHub</Link>
                 <AiFillGithub className="relative inline-block h-4" />
-                . Desarrrollado por <span className="underline cursor-pointer">Darwin Narro</span></p>
+                . Developed by <Link href="https://dev-dana.com" aria-label="Devdana project - Pandas ecommerce" className="underline cursor-pointer" target='_blank'>Darwin Narro</Link></p>
             </div>
-            <div className="flex flex-col">
-              <span>Está pagina aún se encuentra en construcción.</span>
+            <div className="text-xs sm:text-base flex flex-col">
+              <span>This page is still under development.</span>
               <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
             </div>
           </div>
