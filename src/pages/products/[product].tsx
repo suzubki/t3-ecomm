@@ -4,6 +4,7 @@ import { GridProductCard, DetailedProduct, MainLayout } from "~/components";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { Product } from "~/interfaces";
 import Head from "next/head";
+import { PathReader } from "~/components/customs";
 
 const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { product, similarProducts, mostSelledProducts } = props;
@@ -15,20 +16,21 @@ const Post = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
         <title>{`Panda - ${product.title}`}</title>
       </Head>
       <MainLayout>
+        <PathReader />
         <DetailedProduct product={product} />
-        {/* Productos similares */}
+        {/* Similar Products */}
         <div className="mt-10">
-          <h2 className="text-xl font-semibold text-dark-primary">
-            Productos similares
+          <h2 className="px-10 xl:px-0 text-xl font-semibold text-dark-primary">
+            Similar Products
           </h2>
           <div className="mt-6">
             <GridProductCard data={similarProducts} />
           </div>
         </div>
-        {/* Productos más vendidos */}
+        {/* Most sold products */}
         <div className="mt-10">
-          <h2 className="text-xl font-semibold text-dark-primary">
-            Productos más vendidos
+          <h2 className="px-10 xl:px-0 text-xl font-semibold text-dark-primary">
+            Best-selling Products
           </h2>
           <div className="mt-6">
             <GridProductCard data={mostSelledProducts} />
