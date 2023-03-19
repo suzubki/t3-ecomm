@@ -10,7 +10,7 @@ interface Props {
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   return (
-    <Link href={`/productos/${product.id}`} className="relative block flex-1 min-w-[14rem] max-w-[16rem] md:min-w-[16rem] md:max-w-[18rem]">
+    <Link href={`/products/${product.id}`} className="relative block flex-1 min-w-[14rem] max-w-[16rem] md:min-w-[16rem] md:max-w-[18rem]">
       <div className="flex h-full flex-col rounded-md pb-2 shadow-sm transition-all duration-300 ease-in hover:shadow-md">
         {/* Image container */}
         <div className="relative flex h-64 items-center">
