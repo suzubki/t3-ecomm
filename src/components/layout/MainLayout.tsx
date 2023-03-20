@@ -11,6 +11,7 @@ import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;
+  banner?: React.ReactNode;
 }
 
 const sidebarVariants: Variants = {
@@ -35,7 +36,7 @@ const backdropVariants: Variants = {
   },
 }
 
-export const MainLayout: React.FC<Props> = ({ children }) => {
+export const MainLayout: React.FC<Props> = ({ children, banner }) => {
   const { isSidebarOpen, toggleSidebar } = useContext(UIContext)
   const sidebarContainerRef = useRef<HTMLDivElement>(null)
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
@@ -51,7 +52,18 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
 
       {/* Navbar */}
       <Navbar />
-      {/* Contenido */}
+
+      {/* Banner with screen width if exists */}
+      {
+        banner && 
+        ( 
+          <div className="relative z-0 w-full max-h-screen bg-gradient-to-r from-amber-500 to-amber-600">
+            {banner}
+          </div>
+        )
+      }
+
+      {/* Content */}
       <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
       {/* Sidebar */}
       <AnimatePresence mode="wait">
