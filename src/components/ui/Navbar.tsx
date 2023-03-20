@@ -7,11 +7,12 @@ import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { AnimatedTypedText } from "~/components";
+
 import { UIContext } from "~/context/ui";
 import { CartContext } from "~/context";
 import { useClickOutside } from "~/hooks";
 import { slugifyText } from "~/utils";
-import { AnimatedTypedText } from "~/components/animated";
 
 export const Navbar = () => {
   const searchContainer = useRef<HTMLDivElement>(null);
