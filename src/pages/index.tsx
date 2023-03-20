@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { GridProductCard } from "~/components";
+import { GridProductCard, Slider } from "~/components";
 import { MainLayout } from "~/components/layout";
 
 import type { Product } from "~/interfaces";
@@ -11,8 +11,12 @@ const HomePage = ({ products }: { products: Product[] }) => {
       <Head>
         <title>Panda</title>
       </Head>
-      <MainLayout>
+      <MainLayout banner={
+        <Slider />
+      }>
       {/* Main container */}
+        {/* Slider */}
+
         <div className="mx-16 lg:mx-20">
           <GridProductCard data={products} />
         </div>
