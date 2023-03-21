@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { AiFillFacebook, AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
-import { FiSmartphone } from "react-icons/fi";
 
 export const Footer = () => {
 
   return (
-    <footer className="mt-10 border-t-2 border-solid border-t-gray-300">
+    <footer className="border-t-2 border-solid border-t-gray-300">
       {/* Grid */}
       <div className="mx-auto px-8 py-6 max-w-[78rem] flex flex-wrap sm:justify-center gap-x-8 gap-y-8 sm:gap-y-4 sm:gap-x-12 md:gap-0 md:grid md:grid-cols-4 md:py-10">
         {/* 1- Col */}
@@ -58,10 +57,9 @@ export const Footer = () => {
         <div className="flex flex-col md:gap-6">
           <h2 className="text-xl font-semibold tracking-[-1px]">Help</h2>
           <div className="flex flex-col gap-0 md:gap-4 font-medium text-gray-600">
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Contact us</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Work with us</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Cookies policy</span>
-            <span className="text-sm w-max hover:text-gray-700 hover:font-semibold">Privacy policy</span>
+            <Link href="/help/contact-us" aria-label="Contact us" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Contact us</Link>
+            <Link href="/help/cookies-policy" aria-label="Cookies privacy" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Cookies policy</Link>
+            <Link href="/help/privacy-policy" aria-label="Privacy policy" className="text-sm w-max hover:text-gray-700 hover:font-semibold">Privacy policy</Link>
           </div>
         </div>
       </div>

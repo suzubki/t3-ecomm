@@ -32,7 +32,7 @@ export const AnimatedTypedText: React.FC<Props> = ({
     }, 600)
 
     return () => clearInterval(interval)
-  }, [letters, amount])
+  }, [letters, amount, arr, currentIndex])
 
   return (
     <div className="flex gap-[1px]">

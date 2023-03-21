@@ -11,6 +11,7 @@ import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;
+  banner?: React.ReactNode;
 }
 
 const sidebarVariants: Variants = {
@@ -35,7 +36,7 @@ const backdropVariants: Variants = {
   },
 }
 
-export const MainLayout: React.FC<Props> = ({ children }) => {
+export const MainLayout: React.FC<Props> = ({ children, banner }) => {
   const { isSidebarOpen, toggleSidebar } = useContext(UIContext)
   const sidebarContainerRef = useRef<HTMLDivElement>(null)
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
@@ -51,8 +52,21 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
 
       {/* Navbar */}
       <Navbar />
-      {/* Contenido */}
-      <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
+
+      {/* Banner with screen width if exists */}
+      {
+        banner && 
+        ( 
+          <div className="relative z-0 w-full max-h-screen">
+            {banner}
+          </div>
+        )
+      }
+
+      {/* Content */}
+      {
+        children && <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
+      }
       {/* Sidebar */}
       <AnimatePresence mode="wait">
         {
@@ -91,7 +105,7 @@ export const MainLayout: React.FC<Props> = ({ children }) => {
                 . Developed by <Link href="https://dev-dana.com" aria-label="Devdana project - Pandas ecommerce" className="underline cursor-pointer" target='_blank'>Darwin Narro</Link></p>
             </div>
             <div className="text-xs sm:text-base flex flex-col">
-              <span>This page is still under development.</span>
+              <span className="text-xs">This page is still under development.</span>
               <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
             </div>
           </div>

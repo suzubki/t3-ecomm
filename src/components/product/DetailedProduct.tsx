@@ -11,9 +11,6 @@ interface Props {
 
 export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product }) => {
   const [mainImage, setMainImage] = useState(product.image);
-  const handleMainImage = (src: string) => {
-    setMainImage(src);
-  };
   // Información del producto seleccionado, talla y Quantity
   const [selectedProduct, setSelectedProduct] = useState({
     size: null as string | null,
@@ -69,7 +66,7 @@ export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product
         {/* Images container */}
         <div className="flex flex-1 flex-col gap-6">
           {/* Imagen principal */}
-          <div className="relative h-96 md:h-80 overflow-hidden bg-white shadow-sm">
+          <div className="flex-1 relative h-96 md:h-80 overflow-hidden bg-white shadow-sm">
             <Image
               alt={product.description}
               src={mainImage}
@@ -80,8 +77,8 @@ export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product
                       50vw"
             />
           </div>
-          {/* Grid de imágenes */}
-          <div className="flex justify-center gap-4">
+          {/* Images Grid */}
+          {/* <div className="flex justify-center gap-4">
             <div
               onClick={() => handleMainImage(product.image)}
               className="relative cursor-pointer"
@@ -177,7 +174,7 @@ export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product
                 <div className="absolute bottom-0 h-1 w-full bg-black" />
               )}
             </div>
-          </div>
+          </div> */}
         </div>
         {/* Information */}
         <div className="flex flex-1 flex-col lg:mx-0">

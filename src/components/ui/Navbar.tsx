@@ -7,11 +7,12 @@ import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { AnimatedTypedText } from "~/components";
+
 import { UIContext } from "~/context/ui";
 import { CartContext } from "~/context";
 import { useClickOutside } from "~/hooks";
 import { slugifyText } from "~/utils";
-import { AnimatedTypedText } from "~/components/animated";
 
 export const Navbar = () => {
   const searchContainer = useRef<HTMLDivElement>(null);
@@ -39,10 +40,10 @@ export const Navbar = () => {
         {/* Logo, categories, and about us */}
         <div className="flex items-center justify-center w-full md:justify-start md:w-auto md:flex-row md:gap-2 lg:gap-4">
           {/* Logo */}
-          <div className="py-2 h-12 md:h-auto md:py-0 flex flex-shrink-0 justify-center items-center text-white">
+          <div className="py-2 md:h-auto md:py-0 flex justify-center items-center text-white">
             <button className="text-xl font-semibold tracking-tight">
               <Link href="/" className="font-merriweather">
-                <h1 className="text-4xl font-merriweather md:mr-4 font-bold text-dark-primary w-28">
+                <h1 className="text-4xl h-10 font-merriweather md:mr-4 font-bold text-dark-primary w-28">
                   <AnimatedTypedText text="panda." />
                 </h1>
               </Link>
