@@ -57,14 +57,16 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
       {
         banner && 
         ( 
-          <div className="relative z-0 w-full max-h-screen bg-gradient-to-r from-amber-500 to-amber-600">
+          <div className="relative z-0 w-full max-h-screen">
             {banner}
           </div>
         )
       }
 
       {/* Content */}
-      <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
+      {
+        children && <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
+      }
       {/* Sidebar */}
       <AnimatePresence mode="wait">
         {
@@ -103,7 +105,7 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
                 . Developed by <Link href="https://dev-dana.com" aria-label="Devdana project - Pandas ecommerce" className="underline cursor-pointer" target='_blank'>Darwin Narro</Link></p>
             </div>
             <div className="text-xs sm:text-base flex flex-col">
-              <span>This page is still under development.</span>
+              <span className="text-xs">This page is still under development.</span>
               <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
             </div>
           </div>
