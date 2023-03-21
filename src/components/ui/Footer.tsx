@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { AiFillFacebook, AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
-import { FiSmartphone } from "react-icons/fi";
 
 export const Footer = () => {
 
   return (
-    <footer className="mt-10 border-t-2 border-solid border-t-gray-300">
+    <footer className="border-t-2 border-solid border-t-gray-300">
       {/* Grid */}
       <div className="mx-auto px-8 py-6 max-w-[78rem] flex flex-wrap sm:justify-center gap-x-8 gap-y-8 sm:gap-y-4 sm:gap-x-12 md:gap-0 md:grid md:grid-cols-4 md:py-10">
         {/* 1- Col */}
