@@ -11,9 +11,6 @@ interface Props {
 
 export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product }) => {
   const [mainImage, setMainImage] = useState(product.image);
-  const handleMainImage = (src: string) => {
-    setMainImage(src);
-  };
   // Información del producto seleccionado, talla y Quantity
   const [selectedProduct, setSelectedProduct] = useState({
     size: null as string | null,

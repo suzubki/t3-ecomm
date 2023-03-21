@@ -28,7 +28,7 @@ const ContactUsPage = () => {
                   {/* Contact */}
                   <div className="break-all px-10 flex flex-col gap-4 items-center text-sm">
                     <p className="break-words text-center text-dark-primary leading-5 md:px-4">
-                      We are always happy to hear from our customers. If you have any questions, concerns or feedback, please don't hesitate to get in touch with us.
+                      We are always happy to hear from our customers. If you have any questions, concerns or feedback, please don&apos;t hesitate to get in touch with us.
                     </p>
                     <div className="break-words flex flex-col items-center text-center font-medium">
                       <span className="text-gray-500">Email</span>darwinccn25@gmail.com
