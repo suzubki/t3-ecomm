@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { useContext, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineClose, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { BsHandbag } from "react-icons/bs";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
-import { useContext, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 import { AnimatedTypedText } from "~/components";
 
@@ -15,6 +18,10 @@ import { useClickOutside } from "~/hooks";
 import { slugifyText } from "~/utils";
 
 export const Navbar = () => {
+  // User auth
+  const userSession = useSession()
+
+
   const searchContainer = useRef<HTMLDivElement>(null);
   const handleClickSearchContainer = () => {
     // focus input search
@@ -23,11 +30,12 @@ export const Navbar = () => {
 
   const { toggleSidebar } = useContext(UIContext)
   const { state } = useContext(CartContext)
+  // Desktop account is collapsed
+  const [isCollapsedAccountDesktop, setIsCollapsedAccountDesktop] = useState(false);
 
   // Desktop Categories is collapsed
   const [isCollapsedDesktop, setIsCollapsedDesktop] = useState(false);  
   useClickOutside(searchContainer, () => setIsCollapsedDesktop(false))
-
   // Mobile Categories is collapsed
   const [isCategoriesCollapsedMobile, setIsCategoriesCollapsedMobile] = useState(false);
 
@@ -109,11 +117,31 @@ export const Navbar = () => {
               className="w-full border-b-2 border-solid border-b-gray-300 bg-light-primary font-medium placeholder:text-xs focus:border-b-dark-primary focus:outline-none"
             />
           </div>
-          {/* User Icon */}
-          <div className="flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600">
-            <BiUserCircle className="text-xl" />
-            <span className="text-xs tracking-[-.5px]">Log in</span>
-          </div>
+          {/* User */}
+          {
+            userSession.status === "authenticated" ? (
+              <div className="order-1 relative cursor-pointer">
+                <div className="flex text-xs max-w-[8rem] overflow-x-hidden font-medium items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => setIsCollapsedAccountDesktop(!isCollapsedAccountDesktop)}>
+                  { userSession.data.user.image ? (<img className="w-6 h-6 rounded-full" alt={`${userSession.data.user.name} - ${userSession.data.user.id}`} src={ userSession.data.user.image } />) : <BiUserCircle className="text-xl" /> }
+                  { userSession.data.user.name }
+                </div>
+                { isCollapsedAccountDesktop && (
+                  <div className="absolute z-50 -left-2 bg-light-primary top-10 border border-gray-200 w-56 shadow-lg rounded-md p-4">
+                    <div className="flex flex-col gap-4">
+                      <Link href="/account/profile" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">Profile</Link>
+                      <Link href="/account/orders" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">Orders</Link>
+                      <Link href="/account/logout" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900" onClick={() => signOut()}>Logout</Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+            <div className="flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600">
+              <BiUserCircle className="text-xl" />
+              <Link href="/account/login" aria-label="Login" className="text-xs tracking-[-.5px]">Log in</Link>
+            </div>
+            )
+          }
           {/* Carrito */}
           <div className="relative mr-4 flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => toggleSidebar()}>
             <AiOutlineShoppingCart className="text-xl" />
@@ -219,25 +247,38 @@ export const Navbar = () => {
               ) 
             }
           </AnimatePresence>
-          <div className="mx-5 mb-5 bg-gray-100 shadow-sm">
-            <button 
-              className="py-2 px-6 h-16 gap-3 flex items-center justify-center text-black w-full hover:text-gray-600 focus:outline-none focus:text-gray-600" 
-              aria-label="toggle menu" 
-              onClick={() =>{
-               setIsMenuCollapsed(!isMenuCollapsed)
-               setIsCategoriesCollapsedMobile(false)
-              }}>
+          <div className="mx-5 mb-5 shadow-sm">
+            <div 
+              className="h-16 gap-3 text-black w-full hover:text-gray-600 focus:outline-none focus:text-gray-600" 
+            >
               {
                 isMenuCollapsed ? (
-                  <AiOutlineClose className="w-6 h-auto" />
+                  <button onClick={() =>{
+                    setIsMenuCollapsed(!isMenuCollapsed)
+                    setIsCategoriesCollapsedMobile(false)
+                  }} className="w-full h-full bg-gray-100 flex items-center justify-center">
+                    <AiOutlineClose className="w-6 h-auto" />
+                  </button>
                 ) : (
-                  <div className="flex gap-2">
-                    <RxHamburgerMenu className="w-5 h-auto" />
-                    <span className="text-xl">MENU</span>
+                  <div className="h-full flex bg-white">
+                    <button 
+                      onClick={() =>{
+                        setIsMenuCollapsed(!isMenuCollapsed)
+                        setIsCategoriesCollapsedMobile(false)
+                      }} 
+                      className="bg-gray-100 flex-[4] flex justify-center items-center gap-2"
+                      aria-label="toggle menu" 
+                    >
+                      <RxHamburgerMenu className="w-5 h-auto" />
+                      <span className="text-xl">MENU</span>
+                    </button>
+                    <div className="bg-amber-400 flex-1 flex justify-center h-full bg-white">
+                      <BsHandbag className="text-white w-8 h-auto" />
+                    </div>
                   </div>
                 )
               }
-            </button>
+            </div>
           </div>        
         </div>
       </nav>
