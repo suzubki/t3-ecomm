@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Transition, Variants } from "framer-motion";
 
@@ -14,6 +15,16 @@ interface Props {
   banner?: React.ReactNode;
 }
 
+// Backdrop
+const backdropVariants: Variants = {
+  open: {
+    opacity: 0.3,
+  },
+  closed: {
+    opacity: 0,
+  },
+}
+// Sidebar Desktop
 const sidebarVariants: Variants = {
   open: {
     x: 0,
@@ -27,19 +38,14 @@ const sidebarTransition: Transition = {
   ease: 'linear',
   delay: 0.15,
 }
-const backdropVariants: Variants = {
-  open: {
-    opacity: 0.3,
-  },
-  closed: {
-    opacity: 0,
-  },
-}
 
 export const MainLayout: React.FC<Props> = ({ children, banner }) => {
   const { isSidebarOpen, toggleSidebar } = useContext(UIContext)
   const sidebarContainerRef = useRef<HTMLDivElement>(null)
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
+
+  const { data, status } = useSession()
+  console.log({ data,status })
   
   return (
     <div className='font-inter relative min-h-screen bg-white'>
@@ -71,7 +77,7 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
       <AnimatePresence mode="wait">
         {
           isSidebarOpen && (
-            <div className="fixed z-20 top-0 flex w-full min-h-screen">
+            <div className="fixed z-50 top-0 flex w-full min-h-screen">
               <motion.div 
                 initial="closed"
                 animate="open"
@@ -86,7 +92,7 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
                 exit="closed"
                 transition={sidebarTransition}
                 variants={sidebarVariants}
-                className="fixed right-0 top-0 min-h-screen min-w-[30rem] bg-white shadow-lg z-50"
+                className="fixed bottom-0 h-[calc(100vh-5rem)] w-full sm:right-0 sm:top-0 sm:w-auto sm:h-auto sm:min-h-screen sm:min-w-[30rem] bg-white shadow-lg sm:flex-1 sm:z-50"
               >
                   <Sidebar />
               </motion.div>
