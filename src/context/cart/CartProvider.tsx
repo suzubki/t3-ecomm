@@ -23,7 +23,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     dispatch({ type: '[CART] - REMOVE_PRODUCT', payload: { id: product.id, size: product.size } })
   }
   const addProduct = (product: CartProduct) => {
-    const productExists = state.find((item) => item.id === product.id)
+    const productExists = state.find((item) => item.id === product.id && item.size === product.size)
     if (productExists && product.size === productExists.size) {
       return addQuantity(product, product.quantity)
     }
