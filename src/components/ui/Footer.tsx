@@ -4,7 +4,7 @@ import { AiFillFacebook, AiFillTwitterCircle, AiFillInstagram } from "react-icon
 export const Footer = () => {
 
   return (
-    <footer className="border-t-2 border-solid border-t-gray-300">
+    <footer className="border-t-[1px] border-solid border-t-gray-300">
       {/* Grid */}
       <div className="mx-auto px-8 py-6 max-w-[78rem] flex flex-wrap sm:justify-center gap-x-8 gap-y-8 sm:gap-y-4 sm:gap-x-12 md:gap-0 md:grid md:grid-cols-4 md:py-10">
         {/* 1- Col */}
@@ -64,7 +64,7 @@ export const Footer = () => {
         </div>
       </div>
       {/* Rights reserved and stuffs */}
-      <div className="px-12 mb-24 border-t-2 border-solid border-t-gray-300 py-4">
+      <div className="px-12 mb-24 border-t-[1px] border-solid border-t-gray-300 py-4">
         <div className="mx-auto flex flex-col gap-2 sm:flex-row sm:gap-0 sm:max-w-[78rem] sm:justify-between">
           <div className="flex flex-col sm:gap-1">
             <h4 className="font-semibold tracking-[-1px]">
