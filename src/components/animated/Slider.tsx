@@ -49,6 +49,7 @@ export const Slider: React.FC<Props> = ({ images }) => {
                 width={1920} 
                 height={1080} 
                 style={{minWidth: '100vw', height: 'auto'}} 
+                priority
               />
             ))
           }
