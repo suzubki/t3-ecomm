@@ -40,6 +40,8 @@ class MyDocument extends Document {
           rel="stylesheet"
         />
         <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+        {/* Google search console */}
+        <meta name="google-site-verification" content="-RrP8BwONdgJ-mx90Z0JtiNHyHbDo__2zj-TsvniDhA" />
         <body>
           <Main />
           <NextScript />
