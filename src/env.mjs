@@ -23,6 +23,7 @@ const server = z.object({
   DISCORD_CLIENT_SECRET: z.string(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+  JWT_SECRET: z.string(),
   SALT_ROUNDS: z.string(),
   BCRYPT_HASH_LENGTH: z.string(),
   BCRYPT_SECRET: z.string()
@@ -52,6 +53,9 @@ const processEnv = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+
+  // JWT
+  JWT_SECRET: process.env.JWT_SECRET,
 
   // Bcrypt
   SALT_ROUNDS: process.env.SALT_ROUNDS,
