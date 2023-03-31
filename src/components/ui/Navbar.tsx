@@ -122,7 +122,7 @@ export const Navbar = () => {
             userSession.status === "authenticated" ? (
               <div className="order-1 relative cursor-pointer">
                 <div className="flex text-xs max-w-[8rem] overflow-x-hidden font-medium items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => setIsCollapsedAccountDesktop(!isCollapsedAccountDesktop)}>
-                  { userSession.data.user.image ? (<img className="w-6 h-6 rounded-full" alt={`${userSession.data.user.name} - ${userSession.data.user.id}`} src={ userSession.data.user.image } />) : <BiUserCircle className="text-xl" /> }
+                  { userSession.data.user.image ? (<img className="w-6 h-6 rounded-full" alt={`${userSession.data.user.name} - ${userSession.data.user.id}`} src={ userSession.data.user.image } referrerPolicy='no-referrer' />) : <BiUserCircle className="text-xl" /> }
                   { userSession.data.user.name }
                 </div>
                 { isCollapsedAccountDesktop && (
@@ -136,10 +136,10 @@ export const Navbar = () => {
                 )}
               </div>
             ) : (
-            <div className="flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600">
+            <Link href="/account/login" aria-label="Login" className="flex cursor-pointer items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600">
               <BiUserCircle className="text-xl" />
-              <Link href="/account/login" aria-label="Login" className="text-xs tracking-[-.5px]">Log in</Link>
-            </div>
+              <span className="text-xs tracking-[-.5px]">Log in</span>
+            </Link>
             )
           }
           {/* Carrito */}
