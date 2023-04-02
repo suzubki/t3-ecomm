@@ -7,10 +7,13 @@ import {
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 import { env } from "~/env.mjs";
+
 import { prisma } from "~/server/db";
-import { api } from "~/utils/api";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -41,12 +44,14 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
+      console.log({ session, user })
       if (session.user) {
         session.user.id = user.id;
         // session.user.role = user.role; <-- put other properties on the session here
       }
+      console.log({ session })
       return session;
-    },
+    }
   },
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -60,14 +65,20 @@ export const authOptions: NextAuthOptions = {
         // Use trpc server and users route
         if (!credentials) return null
 
-        const { email, password } = credentials
-        const { mutateAsync } = api.users.login.useMutation()
-        const user = await mutateAsync({ email, password })
-
+        const { email, password } = credentials;
+        const user = await prisma.user.findUnique({
+          where: {
+            email,
+          },
+        });
         if (!user) return null
 
-        return user
-      }
+        // Compare password with hash
+        const isPasswordOk = await compare(password, user.password!)
+        if (!isPasswordOk) return null
+
+        return user;
+      },
     }),
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
@@ -88,6 +99,7 @@ export const authOptions: NextAuthOptions = {
      */
   ],
 };
+
 
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
