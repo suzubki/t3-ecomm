@@ -5,8 +5,14 @@ import {
   type DefaultSession,
 } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
 import { env } from "~/env.mjs";
+
 import { prisma } from "~/server/db";
 
 /**
@@ -38,18 +44,49 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
+      console.log({ session, user })
       if (session.user) {
         session.user.id = user.id;
         // session.user.role = user.role; <-- put other properties on the session here
       }
+      console.log({ session })
       return session;
-    },
+    }
   },
   adapter: PrismaAdapter(prisma),
   providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // Use trpc server and users route
+        if (!credentials) return null
+
+        const { email, password } = credentials;
+        const user = await prisma.user.findUnique({
+          where: {
+            email,
+          },
+        });
+        if (!user) return null
+
+        // Compare password with hash
+        const isPasswordOk = await compare(password, user.password!)
+        if (!isPasswordOk) return null
+
+        return user;
+      },
+    }),
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here.
@@ -62,6 +99,7 @@ export const authOptions: NextAuthOptions = {
      */
   ],
 };
+
 
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.

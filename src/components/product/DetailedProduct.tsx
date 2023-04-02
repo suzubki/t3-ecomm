@@ -62,19 +62,19 @@ export const DetailedProduct: React.FC<Props> = ({ product }: { product: Product
   return (
     <form className="px-10 flex flex-col gap-4 lg:px-0" onSubmit={handleAddProductToCart}>
       {/* Images and Add Product */}
-      <div className="flex flex-col md:flex-row gap-10 border-b-2 border-solid border-b-gray-300 pb-10">
+      <div className="flex flex-col md:flex-row md:gap-10 border-b-2 border-solid border-b-gray-300 pb-10">
         {/* Images container */}
         <div className="flex flex-1 flex-col gap-6">
           {/* Imagen principal */}
-          <div className="flex-1 relative h-96 md:h-80 overflow-hidden bg-white shadow-sm">
+          <div className="sm:flex-1 relative h-96 md:h-80 overflow-hidden bg-white shadow-sm">
             <Image
               alt={product.description}
-              src={mainImage}
+              src={product.image}
               className="object-contain p-12 transition-all duration-300 ease-in hover:scale-110"
               fill
               sizes="(min-width: 60em) 25vw,
                       (min-width: 28em) 25vw,
-                      50vw"
+                      70vw"
             />
           </div>
           {/* Images Grid */}
