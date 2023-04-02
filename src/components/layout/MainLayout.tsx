@@ -45,7 +45,7 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
 
   const { data, status } = useSession()
-  console.log({ data,status })
+  // console.log({ data,status })
   
   return (
     <div className='font-inter relative min-h-screen bg-white'>
