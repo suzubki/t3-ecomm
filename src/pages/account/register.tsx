@@ -1,13 +1,14 @@
-import { useState } from "react"
-import Link from "next/link"
+import { useFormik } from "formik"
 import { signIn } from "next-auth/react"
 import Head from "next/head"
-import { BsGoogle, BsInstagram, BsFacebook } from "react-icons/bs"
-import { useFormik } from "formik"
-import { object, string, boolean } from "yup"
+import Link from "next/link"
+import { useState } from "react"
+import { BsFacebook, BsGoogle, BsInstagram } from "react-icons/bs"
+import { boolean, object, string } from "yup"
+import type { StringSchema } from "yup"
 
-import { api, getErrorDescription } from "~/utils"
 import { MainLayout } from "~/components"
+import { api, getErrorDescription } from "~/utils"
 
 
 const initialFormValues = {
@@ -22,9 +23,11 @@ const validationSchema = object({
   name: string().min(4, 'Name must be at least 4 characters').required('Your name is required'),
   email: string().email('Please enter a valid email').required('Email is required'),
   password: string().min(8, 'Password must be at least 8 characters').required('Password is required'),
-  confirmPassword: string().required('Confirm password is required').test('passwords-match', 'Passwords must match', function(value) { 
-    return this.parent.password === value 
-  }),
+  confirmPassword: string().required('Confirm password is required').test('passwords-match', 'Passwords must match', function(value) {
+    // could add others properties to the parent object
+    const parent = this.parent as { password: string }
+    return parent.password === value 
+  }) as unknown as StringSchema<string>,
   termsAndConditions: boolean().oneOf([true], 'You must accept the terms and conditions')
 })
 
@@ -32,7 +35,7 @@ const RegisterPage = () => {
   const [ showErrorMessage, setShowErrorMessage ] = useState('')
   const { isValid, isSubmitting, handleSubmit, errors, touched, resetForm, getFieldProps } = useFormik({
     initialValues: initialFormValues,
-    onSubmit: async(values) => {
+    onSubmit: (values) => {
       const { email, password, name } = values
       mutation.mutate({ email, password, name })
     },
@@ -46,10 +49,10 @@ const RegisterPage = () => {
       const errorMessage = error && getErrorDescription(error.data?.httpStatus, error.data?.stack)
       errorMessage && setShowErrorMessage(errorMessage)
     },
-    onSuccess(_, variables) {
+    async onSuccess(_, variables) {
       // login user
       setShowErrorMessage('')
-      signIn('credentials', { email: variables.email, password: variables.password, callbackUrl: '/' })
+      await signIn('credentials', { email: variables.email, password: variables.password, callbackUrl: '/' })
       resetForm()
     },
   })
@@ -64,7 +67,7 @@ const RegisterPage = () => {
           {/* Form */}
           <div className="mx-auto p-6 sm:p-12 h-[calc(100vh-16rem)] shadow-md bg-white rounded-lg max-w-[28rem] flex flex-col items-center justify-center h-full">
             <h1 className="mb-3 text-2xl font-bold">Sign up</h1>
-            <p className="mb-3 px-4 sm:px-10 leading-4 text-sm text-gray-500 font-medium text-center tracking-[-0.3px]">Why not create an account? It's free</p>
+            <p className="mb-3 px-4 sm:px-10 leading-4 text-sm text-gray-500 font-medium text-center tracking-[-0.3px]">Why not create an account? It&apos;s free</p>
             {/* Register */}
             <form className="w-full" onSubmit={handleSubmit} >
               <div className="mt-2 sm:mt-3">
@@ -156,7 +159,7 @@ const RegisterPage = () => {
             <div className="mt-6 flex flex-col gap-6 items-center">
               <span className="text-xs font-semibold">--- Or sign up with ---</span>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                <button type="button" className="flex gap-1.5 items-center border border-gray-200 py-2 px-3 rounded-lg focus:ring-1 focus:ring-offset-2 focus:ring-gray-400 hover:ring-1 hover:ring-offset-2 hover:ring-gray-400 transition-all duration-200" onClick={() => signIn('google')}>
+                <button type="button" className="flex gap-1.5 items-center border border-gray-200 py-2 px-3 rounded-lg focus:ring-1 focus:ring-offset-2 focus:ring-gray-400 hover:ring-1 hover:ring-offset-2 hover:ring-gray-400 transition-all duration-200" onClick={async () => await signIn('google')}>
                   <BsGoogle className="w-5 h-5" /> <span className="text-xs font-bold">Google</span>
                   <span className="sr-only">Sign in with Google</span>
                 </button>

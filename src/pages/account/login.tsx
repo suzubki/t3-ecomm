@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik"
 import { signIn } from "next-auth/react"
 import Head from "next/head"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { BsFacebook, BsGoogle, BsInstagram } from "react-icons/bs"
 import { object, string } from "yup"
@@ -86,7 +87,7 @@ const LoginPage = () => {
                     <button
                       type="submit"
                       className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-light-primary bg-orange-400 transition-all duration-200 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-200 disabled:bg-orange-200"
-                      onSubmit={() => signIn('credentials', { email: 'email', password: 'password' })}
+                      onSubmit={async() => await signIn('credentials', { email: 'email', password: 'password' })}
                       disabled={!isValid || isSubmitting}
                     >
                       Sign in
@@ -99,7 +100,7 @@ const LoginPage = () => {
             <div className="mt-6 flex flex-col gap-6 items-center">
               <span className="text-xs font-semibold">--- Or sign in with ---</span>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                <button type="button" onClick={() => signIn('google')} className="flex gap-1.5 items-center border border-gray-200 py-2 px-3 rounded-lg focus:ring-1 focus:ring-offset-2 focus:ring-gray-400 hover:ring-1 hover:ring-offset-2 hover:ring-gray-400 transition-all duration-200">
+                <button type="button" onClick={async() => await signIn('google')} className="flex gap-1.5 items-center border border-gray-200 py-2 px-3 rounded-lg focus:ring-1 focus:ring-offset-2 focus:ring-gray-400 hover:ring-1 hover:ring-offset-2 hover:ring-gray-400 transition-all duration-200">
                   <BsGoogle className="w-5 h-5" /> <span className="text-xs font-bold">Google</span>
                   <span className="sr-only">Sign in with Google</span>
                 </button>
@@ -115,7 +116,7 @@ const LoginPage = () => {
             </div>
             <div className="mt-6">
               <p className="text-xs text-center text-gray-700">
-                Don&apos;t have an account?{' '} <span className="font-bold underline"><a href="/account/register">Register here</a></span>
+                Don&apos;t have an account?{' '} <span className="font-bold underline"><Link href="/account/register">Register here</Link></span>
               </p>
             </div>
           </div>
