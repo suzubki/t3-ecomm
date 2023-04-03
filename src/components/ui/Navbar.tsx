@@ -1,26 +1,25 @@
-import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
-import { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useContext, useRef, useState } from "react";
 
-import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineClose, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { BiUserCircle } from "react-icons/bi";
 import { BsHandbag } from "react-icons/bs";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 import { AnimatedTypedText } from "~/components";
 
-import { UIContext } from "~/context/ui";
 import { CartContext } from "~/context";
+import { UIContext } from "~/context/ui";
 import { useClickOutside } from "~/hooks";
 import { slugifyText } from "~/utils";
 
 export const Navbar = () => {
   // User auth
   const userSession = useSession()
-
 
   const searchContainer = useRef<HTMLDivElement>(null);
   const handleClickSearchContainer = () => {
@@ -122,15 +121,15 @@ export const Navbar = () => {
             userSession.status === "authenticated" ? (
               <div className="order-1 relative cursor-pointer">
                 <div className="flex text-xs max-w-[8rem] overflow-x-hidden font-medium items-center gap-1 p-2 text-gray-500 hover:font-medium hover:text-gray-600" onClick={() => setIsCollapsedAccountDesktop(!isCollapsedAccountDesktop)}>
-                  { userSession.data.user.image ? (<img className="w-6 h-6 rounded-full" alt={`${userSession.data.user.name} - ${userSession.data.user.id}`} src={ userSession.data.user.image } referrerPolicy='no-referrer' />) : <BiUserCircle className="text-xl" /> }
-                  { userSession.data.user.name }
+                  { userSession.data.user.image ? (<img className="w-6 h-6 rounded-full" alt={`${userSession.data.user.name ?? 'User'} - ${userSession.data.user.id}`} src={ userSession.data.user.image } referrerPolicy='no-referrer' />) : <BiUserCircle className="text-xl" /> }
+                  { userSession.data.user.name ?? 'User' }
                 </div>
                 { isCollapsedAccountDesktop && (
                   <div className="absolute z-50 -left-2 bg-light-primary top-10 border border-gray-200 w-56 shadow-lg rounded-md p-4">
                     <div className="flex flex-col gap-4">
                       <Link href="/account/profile" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">Profile</Link>
                       <Link href="/account/orders" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900">Orders</Link>
-                      <Link href="/account/logout" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900" onClick={() => signOut()}>Logout</Link>
+                      <button type="button" className="capitalize text-sm font-medium transition-all duration-100 ease-in text-gray-500 hover:text-gray-900" onClick={() => signOut()}>Logout</button>
                     </div>
                   </div>
                 )}

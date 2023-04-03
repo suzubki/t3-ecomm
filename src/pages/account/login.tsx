@@ -2,7 +2,6 @@ import { Form, Formik } from "formik"
 import { signIn } from "next-auth/react"
 import Head from "next/head"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { BsFacebook, BsGoogle, BsInstagram } from "react-icons/bs"
 import { object, string } from "yup"
 import { MainLayout } from "~/components"
@@ -18,8 +17,6 @@ const validationSchema = object({
 })
 
 const LoginPage = () => {
-  const router = useRouter()
-  
   return (
     <>
       <Head>
@@ -32,7 +29,7 @@ const LoginPage = () => {
             <p className="mb-3 px-4 sm:px-10 leading-4 text-sm text-gray-500 font-medium text-center tracking-[-0.3px]">Hey, Enter your details to get sign in to your account</p>
             <Formik
               initialValues={initialFormValues}
-              onSubmit={ async(values, { resetForm }) => {
+              onSubmit={ async(values) => {
                 const status =  await signIn('credentials', {
                   email: values.email,
                   password: values.password,

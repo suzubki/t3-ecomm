@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Transition, Variants } from "framer-motion";
 
@@ -44,9 +43,6 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
   const sidebarContainerRef = useRef<HTMLDivElement>(null)
   useClickOutside(sidebarContainerRef, () => toggleSidebar())
 
-  const { data, status } = useSession()
-  // console.log({ data,status })
-  
   return (
     <div className='font-inter relative min-h-screen bg-white'>
       {/* Cuppon for this month */}

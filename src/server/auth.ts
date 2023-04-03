@@ -74,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         if (!user) return null
 
         // Compare password with hash
+        // TODO: No null assertion here
         const isPasswordOk = await compare(password, user.password!)
         if (!isPasswordOk) return null
 
