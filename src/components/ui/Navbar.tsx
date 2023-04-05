@@ -246,7 +246,7 @@ export const Navbar = () => {
               ) 
             }
           </AnimatePresence>
-          <div className="mx-5 mb-5 shadow-sm">
+          <div className="mx-5 mb-5">
             <div 
               className="h-16 gap-3 text-black w-full hover:text-gray-600 focus:outline-none focus:text-gray-600" 
             >
@@ -260,20 +260,34 @@ export const Navbar = () => {
                   </button>
                 ) : (
                   <div className="h-full flex bg-white">
+                    {/* MENU */}
                     <button 
                       onClick={() =>{
                         setIsMenuCollapsed(!isMenuCollapsed)
                         setIsCategoriesCollapsedMobile(false)
                       }} 
                       className="bg-gray-100 flex-[4] flex justify-center items-center gap-2"
-                      aria-label="toggle menu" 
+                      aria-label="toggle menu"
                     >
                       <RxHamburgerMenu className="w-5 h-auto" />
                       <span className="text-xl">MENU</span>
                     </button>
-                    <div className="bg-amber-400 flex-1 flex justify-center h-full bg-white">
-                      <BsHandbag className="text-white w-8 h-auto" />
-                    </div>
+                    {/* CART */}
+                    <button
+                      className="bg-amber-500 flex-1 flex justify-center items-center h-full"
+                      aria-label="show cart"
+                      onClick={() => {
+                        toggleSidebar()
+                        setIsMenuCollapsed(false)
+                      }}
+                    >
+                      <div className="relative">
+                        <BsHandbag className="text-white w-8 h-auto" />
+                        <div className="absolute -top-1 -right-3 bg-dark-primary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white">
+                          {state.length}
+                        </div>
+                      </div>
+                    </button>
                   </div>
                 )
               }

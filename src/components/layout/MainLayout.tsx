@@ -59,7 +59,7 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
       {
         banner && 
         ( 
-          <div className="relative z-0 w-full max-h-screen">
+          <div className="pb-16 relative z-0 w-full max-h-screen">
             {banner}
           </div>
         )
@@ -97,7 +97,9 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
         }
       </AnimatePresence>
       {/* Footer */}
-      <Footer />
+      <div className="mt-24">
+        <Footer />
+      </div>
       {/* Página en construcción */}
       <div className="fixed bottom-0 z-10 left-0 h-20 w-full bg-amber-500">
           <div className="mx-auto max-w-lg text-center text-white text-lg leading-5 font-semibold tracking-[-0.5px] h-full flex flex-col justify-center items-center">
