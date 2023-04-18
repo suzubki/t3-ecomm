@@ -28,8 +28,9 @@ export const Slider: React.FC<Props> = ({ images }) => {
   },[index, setIndex, images])
 
   return (
-    <div className="mb-20 max-h-screen overflow-x-hidden relative">
+    <div className="max-h-screen overflow-x-hidden relative">
       <div className='relative overflow-hidden relative z-full'>
+        {/* Set to 6rem show the image with all the height as possible ^^ */}
         <motion.div 
           style={{ width: '100vw', height: 'calc(100vh - 10rem)' }} 
           animate={{ x: `-${index * 100}%` }}

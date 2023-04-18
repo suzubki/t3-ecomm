@@ -10,7 +10,7 @@ import { useClickOutside } from "~/hooks";
 import Link from "next/link";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   banner?: React.ReactNode;
 }
 
@@ -22,33 +22,34 @@ const backdropVariants: Variants = {
   closed: {
     opacity: 0,
   },
-}
+};
 // Sidebar Desktop
 const sidebarVariants: Variants = {
   open: {
     x: 0,
   },
   closed: {
-    x: '150%',
+    x: "150%",
   },
-}
+};
 const sidebarTransition: Transition = {
   duration: 0.2,
-  ease: 'linear',
+  ease: "linear",
   delay: 0.15,
-}
+};
 
 export const MainLayout: React.FC<Props> = ({ children, banner }) => {
-  const { isSidebarOpen, toggleSidebar } = useContext(UIContext)
-  const sidebarContainerRef = useRef<HTMLDivElement>(null)
-  useClickOutside(sidebarContainerRef, () => toggleSidebar())
+  const { isSidebarOpen, toggleSidebar } = useContext(UIContext);
+  const sidebarContainerRef = useRef<HTMLDivElement>(null);
+  useClickOutside(sidebarContainerRef, () => toggleSidebar());
 
   return (
-    <div className='font-inter relative min-h-screen bg-white'>
+    <div className="relative min-h-screen bg-white font-inter">
       {/* Cuppon for this month */}
-      <div className="w-full z-10 bg-amber-500 text-white text-xs text-center font-medium tracking-[1px] px-4 py-2">
-        <p className="uppercase font-merriweather">Use code <span className="font-semibold">PANDA</span> for 10% off
-          and free shipping on all orders over $50
+      <div className="z-10 w-full bg-amber-500 px-4 py-2 text-center text-xs font-medium tracking-[1px] text-white">
+        <p className="font-merriweather uppercase">
+          Use code <span className="font-semibold">PANDA</span> for 10% off and
+          free shipping on all orders over $50
         </p>
       </div>
 
@@ -56,63 +57,79 @@ export const MainLayout: React.FC<Props> = ({ children, banner }) => {
       <Navbar />
 
       {/* Banner with screen width if exists */}
-      {
-        banner && 
-        ( 
-          <div className="pb-16 relative z-0 w-full max-h-screen">
-            {banner}
-          </div>
-        )
-      }
+      {banner && (
+        <div className="relative z-0 max-h-screen w-full pb-16">{banner}</div>
+      )}
 
       {/* Content */}
-      {
-        children && <div className="relative z-0 mx-auto my-4 max-w-[80rem]">{children}</div>
-      }
+      {children && (
+        <div className="relative z-0 mx-auto my-4 max-w-[80rem]">
+          {children}
+        </div>
+      )}
       {/* Sidebar */}
       <AnimatePresence mode="wait">
-        {
-          isSidebarOpen && (
-            <div className="fixed z-50 top-0 flex w-full min-h-screen">
-              <motion.div 
-                initial="closed"
-                animate="open"
-                exit="closed"
-                variants={backdropVariants}
-                className="bg-black contrast-50 min-h-screen flex-1" 
-              />
-              <motion.div
-                ref={sidebarContainerRef}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                transition={sidebarTransition}
-                variants={sidebarVariants}
-                className="fixed bottom-0 h-[calc(100vh-5rem)] w-full sm:right-0 sm:top-0 sm:w-auto sm:h-auto sm:min-h-screen sm:min-w-[30rem] bg-white shadow-lg sm:flex-1 sm:z-50"
-              >
-                  <Sidebar />
-              </motion.div>
-            </div>
-          )
-        }
+        {isSidebarOpen && (
+          <div className="fixed top-0 z-50 flex min-h-screen w-full">
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={backdropVariants}
+              className="min-h-screen flex-1 bg-black contrast-50"
+            />
+            <motion.div
+              ref={sidebarContainerRef}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              transition={sidebarTransition}
+              variants={sidebarVariants}
+              className="fixed bottom-0 h-[calc(100vh-5rem)] w-full bg-white shadow-lg sm:right-0 sm:top-0 sm:z-50 sm:h-auto sm:min-h-screen sm:w-auto sm:min-w-[30rem] sm:flex-1"
+            >
+              <Sidebar />
+            </motion.div>
+          </div>
+        )}
       </AnimatePresence>
       {/* Footer */}
       <div className="mt-24">
         <Footer />
       </div>
       {/* Página en construcción */}
-      <div className="fixed bottom-0 z-10 left-0 h-20 w-full bg-amber-500">
-          <div className="mx-auto max-w-lg text-center text-white text-lg leading-5 font-semibold tracking-[-0.5px] h-full flex flex-col justify-center items-center">
-            <div className="flex text-xs font-bold text-dark-primary">
-                <p>Check out the code on<Link aria-label="Github code" href="https://github.com/suzubki/t3-ecomm" target='_blank' className="underline cursor-pointer"> GitHub</Link>
-                <AiFillGithub className="relative inline-block h-4" />
-                . Developed by <Link href="https://dev-dana.com" aria-label="Devdana project - Pandas ecommerce" className="underline cursor-pointer" target='_blank'>Darwin Narro</Link></p>
-            </div>
-            <div className="text-xs sm:text-base flex flex-col">
-              <span className="text-xs">This page is still under development.</span>
-              <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
-            </div>
+      <div className="fixed bottom-0 left-0 z-10 h-20 w-full bg-amber-500">
+        <div className="mx-auto flex h-full max-w-lg flex-col items-center justify-center text-center text-lg font-semibold leading-5 tracking-[-0.5px] text-white">
+          <div className="flex text-xs font-bold text-dark-primary">
+            <p>
+              Check out the code on
+              <Link
+                aria-label="Github code"
+                href="https://github.com/suzubki/t3-ecomm"
+                target="_blank"
+                className="cursor-pointer underline"
+              >
+                {" "}
+                GitHub
+              </Link>
+              <AiFillGithub className="relative inline-block h-4" />. Developed
+              by{" "}
+              <Link
+                href="https://dev-dana.com"
+                aria-label="Devdana project - Pandas ecommerce"
+                className="cursor-pointer underline"
+                target="_blank"
+              >
+                Darwin Narro
+              </Link>
+            </p>
           </div>
+          <div className="flex flex-col text-xs sm:text-base">
+            <span className="text-xs">
+              This page is still under development.
+            </span>
+            <span>Tailwind + Typescript + TRPC + Next.js + Framer Motion</span>
+          </div>
+        </div>
       </div>
     </div>
   );
